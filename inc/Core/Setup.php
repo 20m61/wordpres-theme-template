@@ -102,6 +102,12 @@ class Setup {
 
         // Add support for custom spacing
         add_theme_support('custom-spacing');
+
+        // Add support for Full Site Editing
+        add_theme_support('block-templates');
+
+        // Add support for template parts
+        add_theme_support('block-template-parts');
     }
 
     /**
