@@ -25,12 +25,20 @@ class Assets {
     private $version;
 
     /**
+     * Vite manifest
+     *
+     * @var array|null
+     */
+    private $vite_manifest;
+
+    /**
      * Constructor
      *
      * @since 1.0.0
      */
     public function __construct() {
         $this->version = wp_get_theme()->get('Version') ?: '1.0.0';
+        $this->vite_manifest = $this->load_vite_manifest();
     }
 
     /**
@@ -52,31 +60,14 @@ class Assets {
      * @return void
      */
     public function enqueue_scripts(): void {
-        // Enqueue theme stylesheet
-        wp_enqueue_style(
-            'kawaii-ultra-style',
-            get_stylesheet_uri(),
-            [],
-            $this->version
-        );
+        // Enqueue main theme assets (includes main CSS via Vite)
+        $this->enqueue_vite_asset('kawaii-ultra-main', 'src/js/main.js');
 
         // Enqueue navigation script
-        wp_enqueue_script(
-            'kawaii-ultra-navigation',
-            get_template_directory_uri() . '/js/navigation.js',
-            [],
-            $this->version,
-            true
-        );
+        $this->enqueue_vite_asset('kawaii-ultra-navigation', 'src/js/navigation.js');
 
         // Enqueue skip link focus fix
-        wp_enqueue_script(
-            'kawaii-ultra-skip-link-focus-fix',
-            get_template_directory_uri() . '/js/skip-link-focus-fix.js',
-            [],
-            $this->version,
-            true
-        );
+        $this->enqueue_vite_asset('kawaii-ultra-skip-link-focus-fix', 'src/js/skip-link-focus-fix.js');
 
         // Enqueue comment reply script for threaded comments
         if (is_singular() && comments_open() && get_option('thread_comments')) {
@@ -110,20 +101,21 @@ class Assets {
             return;
         }
 
-        wp_enqueue_style(
-            'kawaii-ultra-admin',
-            get_template_directory_uri() . '/css/admin.css',
-            [],
-            $this->version
-        );
+        // Enqueue admin CSS
+        if (!$this->is_development_mode()) {
+            $admin_css_url = $this->get_vite_asset_url('src/css/admin.scss');
+            if ($admin_css_url) {
+                wp_enqueue_style(
+                    'kawaii-ultra-admin',
+                    $admin_css_url,
+                    [],
+                    null
+                );
+            }
+        }
 
-        wp_enqueue_script(
-            'kawaii-ultra-admin',
-            get_template_directory_uri() . '/js/admin.js',
-            ['jquery'],
-            $this->version,
-            true
-        );
+        // Enqueue admin JavaScript
+        $this->enqueue_vite_asset('kawaii-ultra-admin', 'src/js/admin.js', ['jquery']);
     }
 
     /**
@@ -177,5 +169,119 @@ class Assets {
      */
     public function get_version(): string {
         return $this->version;
+    }
+
+    /**
+     * Load Vite manifest file
+     *
+     * @since 1.0.0
+     * @return array|null Vite manifest data or null if not found.
+     */
+    private function load_vite_manifest(): ?array {
+        $manifest_path = get_template_directory() . '/dist/.vite/manifest.json';
+        
+        if (!file_exists($manifest_path)) {
+            return null;
+        }
+        
+        $manifest_content = file_get_contents($manifest_path);
+        return $manifest_content ? json_decode($manifest_content, true) : null;
+    }
+
+    /**
+     * Get Vite asset URL
+     *
+     * @since 1.0.0
+     * @param string $entry Entry name from manifest.
+     * @return string|null Asset URL or null if not found.
+     */
+    private function get_vite_asset_url(string $entry): ?string {
+        if (!$this->vite_manifest || !isset($this->vite_manifest[$entry])) {
+            return null;
+        }
+
+        $asset_file = $this->vite_manifest[$entry]['file'] ?? null;
+        return $asset_file ? get_template_directory_uri() . '/dist/' . $asset_file : null;
+    }
+
+    /**
+     * Get Vite CSS dependencies
+     *
+     * @since 1.0.0
+     * @param string $entry Entry name from manifest.
+     * @return array CSS file URLs.
+     */
+    private function get_vite_css_deps(string $entry): array {
+        if (!$this->vite_manifest || !isset($this->vite_manifest[$entry])) {
+            return [];
+        }
+
+        $css_files = $this->vite_manifest[$entry]['css'] ?? [];
+        $css_urls = [];
+        
+        foreach ($css_files as $css_file) {
+            $css_urls[] = get_template_directory_uri() . '/dist/' . $css_file;
+        }
+        
+        return $css_urls;
+    }
+
+    /**
+     * Check if we're in development mode (Vite dev server running)
+     *
+     * @since 1.0.0
+     * @return bool True if in development mode.
+     */
+    private function is_development_mode(): bool {
+        return defined('WP_DEBUG') && WP_DEBUG && $this->vite_manifest === null;
+    }
+
+    /**
+     * Enqueue Vite asset
+     *
+     * @since 1.0.0
+     * @param string $handle Script/style handle.
+     * @param string $entry Entry name from manifest.
+     * @param array  $deps Dependencies.
+     * @param bool   $in_footer Load script in footer.
+     * @return void
+     */
+    private function enqueue_vite_asset(string $handle, string $entry, array $deps = [], bool $in_footer = true): void {
+        if ($this->is_development_mode()) {
+            // Development mode - load from Vite dev server
+            wp_enqueue_script(
+                $handle,
+                'http://localhost:3000/src/js/' . basename($entry, '.js') . '.js',
+                $deps,
+                null,
+                $in_footer
+            );
+            return;
+        }
+
+        // Production mode - load compiled assets
+        $js_url = $this->get_vite_asset_url($entry);
+        $css_deps = $this->get_vite_css_deps($entry);
+        
+        // Enqueue CSS dependencies first
+        foreach ($css_deps as $index => $css_url) {
+            wp_enqueue_style(
+                $handle . '-css-' . $index,
+                $css_url,
+                [],
+                null
+            );
+        }
+        
+        // Enqueue JavaScript
+        if ($js_url) {
+            wp_enqueue_script(
+                $handle,
+                $js_url,
+                $deps,
+                null,
+                $in_footer
+            );
+        }
     }
 }

@@ -1,0 +1,40 @@
+/**
+ * Admin CSS
+ * 
+ * Styles for WordPress admin and customizer.
+ */
+
+.kawaii-ultra-admin-notice {
+    padding: 15px;
+    margin: 5px 0 15px;
+    border-left: 4px solid #0073aa;
+    background-color: #fff;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.kawaii-ultra-admin-notice.notice-success {
+    border-left-color: #46b450;
+}
+
+.kawaii-ultra-admin-notice.notice-warning {
+    border-left-color: #ffb900;
+}
+
+.kawaii-ultra-admin-notice.notice-error {
+    border-left-color: #dc3232;
+}
+
+/* Customizer specific styles */
+.customize-control-kawaii-ultra-info {
+    margin-bottom: 15px;
+}
+
+.customize-control-kawaii-ultra-info .customize-control-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.customize-control-kawaii-ultra-info .customize-control-description {
+    font-style: italic;
+    color: #666;
+}

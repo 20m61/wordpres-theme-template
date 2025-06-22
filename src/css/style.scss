@@ -1,0 +1,82 @@
+/*
+Theme Name: KawaiiUltra Theme Template
+Description: A modern WordPress theme template demonstrating OOP architecture with namespacing
+Version: 1.0.0
+Author: 20m61
+License: MIT
+Text Domain: kawaii-ultra
+Domain Path: /languages
+*/
+
+@import 'variables';
+
+/* Basic theme styles */
+body {
+    font-family: $font-family-base;
+    line-height: $line-height-base;
+    color: $text-color;
+}
+
+.container {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-base;
+}
+
+/* Header styles */
+.site-header {
+    background: $background-color;
+    border-bottom: 1px solid $border-color;
+    padding: $spacing-base 0;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Navigation styles */
+.main-navigation {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+
+    li {
+        margin-right: $spacing-base;
+    }
+
+    a {
+        text-decoration: none;
+        color: $text-color;
+        padding: $spacing-small 0;
+        
+        &:hover {
+            color: $primary-color;
+        }
+    }
+}
+
+/* Content styles */
+.site-main {
+    padding: $spacing-large 0;
+}
+
+.entry-title {
+    font-size: 1.8rem;
+    margin-bottom: $spacing-base;
+}
+
+.entry-content {
+    margin-bottom: 30px;
+}
+
+/* Footer styles */
+.site-footer {
+    background: $light-gray;
+    padding: $spacing-base 0;
+    border-top: 1px solid $border-color;
+    text-align: center;
+}

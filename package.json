@@ -1,0 +1,25 @@
+{
+  "name": "kawaii-ultra-theme",
+  "version": "1.0.0",
+  "description": "A modern WordPress theme template with OOP architecture and Vite build system",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:watch": "vite build --watch"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "sass": "^1.69.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "vite-plugin-live-reload": "^3.0.3",
+    "@vitejs/plugin-legacy": "^5.0.0",
+    "terser": "^5.24.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
+}
