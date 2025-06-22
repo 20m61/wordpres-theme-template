@@ -55,6 +55,9 @@ composer.lock
 node_modules/
 package-lock.json
 
+# Legacy templates backup (for reference only)
+/legacy-templates/
+
 # Build files
 /dist/
 /build/
