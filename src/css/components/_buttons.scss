@@ -1,0 +1,316 @@
+// =============================================================================
+// COMPONENTS - BUTTONS
+// Button components using BEM methodology
+// =============================================================================
+
+@use '../abstracts' as *;
+
+// Base button component
+.btn {
+  @include button-base;
+  
+  // Button modifiers
+  &--primary {
+    @include button-primary;
+  }
+  
+  &--secondary {
+    @include button-secondary;
+  }
+  
+  &--ghost {
+    @include button-ghost;
+  }
+  
+  &--outline {
+    background: transparent;
+    color: $color-primary;
+    border: 2px solid $color-primary;
+    
+    &:hover:not(:disabled) {
+      background: $color-primary;
+      color: $color-white;
+      transform: translateY(-2px);
+      box-shadow: $shadow-kawaii-medium;
+    }
+  }
+  
+  &--kawaii {
+    background: $gradient-kawaii-rainbow;
+    color: $color-white;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+    
+    &:hover::before {
+      left: 100%;
+    }
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: $shadow-kawaii-strong;
+    }
+  }
+  
+  // Size modifiers
+  &--small {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-small;
+    border-radius: $border-radius-medium;
+  }
+  
+  &--large {
+    padding: $spacing-base $spacing-lg;
+    font-size: $font-size-normal;
+    border-radius: $border-radius-large;
+  }
+  
+  &--xl {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-large;
+    border-radius: $border-radius-large;
+  }
+  
+  // Shape modifiers
+  &--rounded {
+    border-radius: $border-radius-round;
+  }
+  
+  &--square {
+    border-radius: 0;
+  }
+  
+  &--pill {
+    border-radius: 50px;
+  }
+  
+  // State modifiers
+  &--loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1rem;
+      height: 1rem;
+      margin: -0.5rem 0 0 -0.5rem;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: btn-loading 0.75s linear infinite;
+    }
+  }
+  
+  &--success {
+    background: $color-pale-green;
+    color: kawaii-darken($color-pale-green, 40%);
+    
+    &:hover:not(:disabled) {
+      background: kawaii-darken($color-pale-green, 10%);
+    }
+  }
+  
+  &--warning {
+    background: $color-light-yellow;
+    color: kawaii-darken($color-light-yellow, 40%);
+    
+    &:hover:not(:disabled) {
+      background: kawaii-darken($color-light-yellow, 10%);
+    }
+  }
+  
+  &--danger {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: $color-white;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #ff5252 0%, #d32f2f 100%);
+    }
+  }
+  
+  // Width modifiers
+  &--full {
+    width: 100%;
+  }
+  
+  &--auto {
+    width: auto;
+  }
+  
+  // Button elements
+  &__icon {
+    font-size: 1.2em;
+    
+    &--left {
+      margin-right: $spacing-xs;
+    }
+    
+    &--right {
+      margin-left: $spacing-xs;
+    }
+    
+    &--only {
+      margin: 0;
+    }
+  }
+  
+  &__text {
+    // Text-specific styles if needed
+  }
+  
+  // Button group context
+  .btn-group & {
+    border-radius: 0;
+    
+    &:first-child {
+      border-top-left-radius: $border-radius-medium;
+      border-bottom-left-radius: $border-radius-medium;
+    }
+    
+    &:last-child {
+      border-top-right-radius: $border-radius-medium;
+      border-bottom-right-radius: $border-radius-medium;
+    }
+    
+    &:not(:last-child) {
+      margin-right: -1px;
+    }
+  }
+}
+
+// Button group component
+.btn-group {
+  display: inline-flex;
+  align-items: center;
+  
+  &--vertical {
+    flex-direction: column;
+    
+    .btn {
+      border-radius: 0;
+      
+      &:first-child {
+        border-top-left-radius: $border-radius-medium;
+        border-top-right-radius: $border-radius-medium;
+      }
+      
+      &:last-child {
+        border-bottom-left-radius: $border-radius-medium;
+        border-bottom-right-radius: $border-radius-medium;
+      }
+      
+      &:not(:last-child) {
+        margin-bottom: -1px;
+        margin-right: 0;
+      }
+    }
+  }
+  
+  &--spaced {
+    gap: $spacing-sm;
+    
+    .btn {
+      border-radius: $border-radius-medium;
+      margin: 0;
+    }
+  }
+}
+
+// Loading animation
+@keyframes btn-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Icon button specific styles
+.btn-icon {
+  @extend .btn;
+  
+  padding: $spacing-sm;
+  width: auto;
+  height: auto;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  
+  &--small {
+    padding: $spacing-xs;
+    min-width: 2rem;
+    min-height: 2rem;
+  }
+  
+  &--large {
+    padding: $spacing-base;
+    min-width: 3rem;
+    min-height: 3rem;
+  }
+  
+  .btn__icon--only {
+    margin: 0;
+  }
+}
+
+// Toggle button
+.btn-toggle {
+  @extend .btn--ghost;
+  
+  &--active {
+    background: $color-primary;
+    color: $color-white;
+    
+    &:hover {
+      background: kawaii-darken($color-primary, 10%);
+      color: $color-white;
+    }
+  }
+}
+
+// Floating action button
+.btn-fab {
+  @extend .btn;
+  @extend .btn--primary;
+  @extend .btn--rounded;
+  
+  position: fixed;
+  bottom: $spacing-lg;
+  right: $spacing-lg;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  box-shadow: $shadow-strong;
+  z-index: $z-index-fixed;
+  
+  &:hover {
+    box-shadow: $shadow-kawaii-strong;
+    transform: translateY(-4px) scale(1.1);
+  }
+  
+  &--mini {
+    width: 40px;
+    height: 40px;
+    bottom: $spacing-base;
+    right: $spacing-base;
+  }
+  
+  @include mobile-only {
+    bottom: $spacing-base;
+    right: $spacing-base;
+  }
+}

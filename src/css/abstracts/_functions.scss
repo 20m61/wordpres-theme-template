@@ -1,0 +1,218 @@
+// =============================================================================
+// KAWAII ULTRA THEME - FUNCTIONS
+// Utility functions for calculations and manipulations
+// =============================================================================
+
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:string';
+
+// -----------------------------------------------------------------------------
+// SPACING FUNCTIONS
+// -----------------------------------------------------------------------------
+
+/// Convert spacing scale number to rem value
+/// @param {Number} $scale - The spacing scale number (10, 15, 20, etc.)
+/// @return {String} - The rem value
+@function spacing($scale) {
+  $spacing-map: (
+    10: 0.25rem,
+    15: 0.5rem,
+    20: 1rem,
+    30: 1.5rem,
+    40: 2rem,
+    45: 2.5rem,
+    50: 3rem,
+    60: 4rem,
+    70: 5rem,
+    80: 6rem,
+    90: 8rem,
+    100: 10rem
+  );
+  
+  @if map-has-key($spacing-map, $scale) {
+    @return map-get($spacing-map, $scale);
+  } @else {
+    @error "Unknown spacing scale `#{$scale}`. Available scales: #{map-keys($spacing-map)}";
+  }
+}
+
+// -----------------------------------------------------------------------------
+// COLOR FUNCTIONS
+// -----------------------------------------------------------------------------
+
+/// Generate a lighter variant of a color
+/// @param {Color} $color - The base color
+/// @param {Number} $percentage - The percentage to lighten (default: 10%)
+/// @return {Color} - The lightened color
+@function kawaii-lighten($color, $percentage: 10%) {
+  @return color.mix(white, $color, $percentage);
+}
+
+/// Generate a darker variant of a color
+/// @param {Color} $color - The base color
+/// @param {Number} $percentage - The percentage to darken (default: 10%)
+/// @return {Color} - The darkened color
+@function kawaii-darken($color, $percentage: 10%) {
+  @return color.mix(black, $color, $percentage);
+}
+
+/// Create a kawaii-style color with increased saturation
+/// @param {Color} $color - The base color
+/// @param {Number} $saturation - The saturation adjustment (default: 10%)
+/// @return {Color} - The kawaii-fied color
+@function kawaii-fy($color, $saturation: 10%) {
+  @return color.adjust($color, $saturation: $saturation);
+}
+
+/// Generate an alpha variant of a color
+/// @param {Color} $color - The base color
+/// @param {Number} $alpha - The alpha value (0-1)
+/// @return {Color} - The color with alpha
+@function alpha($color, $alpha) {
+  @return color.change($color, $alpha: $alpha);
+}
+
+// -----------------------------------------------------------------------------
+// TYPOGRAPHY FUNCTIONS
+// -----------------------------------------------------------------------------
+
+/// Calculate fluid typography size
+/// @param {Number} $min-size - Minimum font size
+/// @param {Number} $max-size - Maximum font size
+/// @param {Number} $min-width - Minimum viewport width (default: 320px)
+/// @param {Number} $max-width - Maximum viewport width (default: 1200px)
+/// @return {String} - Clamp function for fluid typography
+@function fluid-type($min-size, $max-size, $min-width: 320px, $max-width: 1200px) {
+  $slope: math.div($max-size - $min-size, $max-width - $min-width);
+  $intercept: $min-size - $slope * $min-width;
+  
+  @return clamp(#{$min-size}, #{$intercept} + #{$slope * 100vw}, #{$max-size});
+}
+
+/// Convert pixel value to rem
+/// @param {Number} $pixels - The pixel value
+/// @param {Number} $base-font-size - The base font size (default: 16px)
+/// @return {Number} - The rem value
+@function rem($pixels, $base-font-size: 16px) {
+  @if math.unit($pixels) != 'px' {
+    @error "Function rem() expects pixel values, got #{$pixels}";
+  }
+  
+  @return math.div($pixels, $base-font-size) * 1rem;
+}
+
+/// Convert pixel value to em
+/// @param {Number} $pixels - The pixel value
+/// @param {Number} $context - The context font size (default: 16px)
+/// @return {Number} - The em value
+@function em($pixels, $context: 16px) {
+  @if math.unit($pixels) != 'px' {
+    @error "Function em() expects pixel values, got #{$pixels}";
+  }
+  
+  @return math.div($pixels, $context) * 1em;
+}
+
+// -----------------------------------------------------------------------------
+// LAYOUT FUNCTIONS
+// -----------------------------------------------------------------------------
+
+/// Calculate grid column width
+/// @param {Number} $columns - Number of columns
+/// @param {Number} $gap - Gap between columns
+/// @param {Number} $container-width - Container width (default: 100%)
+/// @return {String} - CSS calc() value
+@function grid-width($columns, $gap, $container-width: 100%) {
+  @return calc((#{$container-width} - #{($columns - 1) * $gap}) / #{$columns});
+}
+
+/// Generate aspect ratio padding
+/// @param {Number} $width - Aspect ratio width
+/// @param {Number} $height - Aspect ratio height
+/// @return {Number} - Padding percentage
+@function aspect-ratio($width, $height) {
+  @return math.percentage(math.div($height, $width));
+}
+
+// -----------------------------------------------------------------------------
+// KAWAII UTILITY FUNCTIONS
+// -----------------------------------------------------------------------------
+
+/// Generate kawaii gradient from two colors
+/// @param {Color} $color1 - First color
+/// @param {Color} $color2 - Second color
+/// @param {String} $direction - Gradient direction (default: 135deg)
+/// @return {String} - Linear gradient
+@function kawaii-gradient($color1, $color2, $direction: 135deg) {
+  @return linear-gradient($direction, $color1 0%, $color2 100%);
+}
+
+/// Generate kawaii rainbow gradient
+/// @param {List} $colors - List of colors
+/// @param {String} $direction - Gradient direction (default: 135deg)
+/// @return {String} - Linear gradient with multiple colors
+@function kawaii-rainbow($colors, $direction: 135deg) {
+  $gradient-stops: ();
+  $step: math.div(100%, length($colors) - 1);
+  
+  @for $i from 1 through length($colors) {
+    $color: nth($colors, $i);
+    $stop: ($i - 1) * $step;
+    $gradient-stops: append($gradient-stops, #{$color} #{$stop}, comma);
+  }
+  
+  @return linear-gradient($direction, $gradient-stops);
+}
+
+/// Generate kawaii shadow with color tint
+/// @param {Number} $x - X offset
+/// @param {Number} $y - Y offset
+/// @param {Number} $blur - Blur radius
+/// @param {Color} $color - Shadow color (default: #ff69b4)
+/// @param {Number} $opacity - Shadow opacity (default: 0.2)
+/// @return {String} - Box shadow value
+@function kawaii-shadow($x, $y, $blur, $color: #ff69b4, $opacity: 0.2) {
+  @return #{$x} #{$y} #{$blur} alpha($color, $opacity);
+}
+
+// -----------------------------------------------------------------------------
+// STRING FUNCTIONS
+// -----------------------------------------------------------------------------
+
+/// Replace substring in a string
+/// @param {String} $string - The string to search in
+/// @param {String} $search - The substring to search for
+/// @param {String} $replace - The replacement string
+/// @return {String} - The modified string
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+  
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}
+
+/// Convert string to lowercase
+/// @param {String} $string - The string to convert
+/// @return {String} - The lowercase string
+@function to-lower($string) {
+  $lowercase: 'abcdefghijklmnopqrstuvwxyz';
+  $uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $result: '';
+  
+  @for $i from 1 through string.length($string) {
+    $char: string.slice($string, $i, $i);
+    $index: string.index($uppercase, $char);
+    
+    @if $index {
+      $result: $result + string.slice($lowercase, $index, $index);
+    } @else {
+      $result: $result + $char;
+    }
+  }
+  
+  @return $result;
+}

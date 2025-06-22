@@ -1,0 +1,365 @@
+// =============================================================================
+// BASE - TYPOGRAPHY
+// Typography styles using BEM methodology and theme.json integration
+// =============================================================================
+
+@use '../abstracts' as *;
+
+// Base typography class
+.typography {
+  font-family: $font-family-system;
+  font-size: $font-size-medium;
+  line-height: $line-height-normal;
+  color: $color-text;
+  
+  // Text selection
+  ::selection {
+    background-color: alpha($color-primary, 0.2);
+    color: $color-text;
+  }
+}
+
+// Headings with BEM methodology
+.heading {
+  @include heading-base;
+  
+  // Heading modifiers
+  &--display {
+    @include heading-1;
+    @include text-gradient;
+    margin-bottom: $spacing-md;
+  }
+  
+  &--1 {
+    @include heading-1;
+    margin-bottom: $spacing-md;
+  }
+  
+  &--2 {
+    @include heading-2;
+    margin: $spacing-lg 0 $spacing-base;
+  }
+  
+  &--3 {
+    @include heading-3;
+    margin: $spacing-md 0 $spacing-base;
+  }
+  
+  &--4 {
+    @include heading-4;
+    margin: $spacing-base 0 $spacing-sm;
+  }
+  
+  &--5 {
+    font-size: $font-size-normal;
+    margin: $spacing-base 0 $spacing-sm;
+  }
+  
+  &--6 {
+    font-size: $font-size-medium;
+    margin: $spacing-base 0 $spacing-sm;
+  }
+  
+  // Heading color variants
+  &--primary {
+    color: $color-primary;
+  }
+  
+  &--gradient {
+    @include text-gradient;
+  }
+  
+  &--center {
+    text-align: center;
+  }
+}
+
+// Text elements with BEM
+.text {
+  font-size: $font-size-medium;
+  line-height: $line-height-normal;
+  color: $color-text;
+  margin: 0 0 $spacing-base;
+  
+  // Text modifiers
+  &--large {
+    font-size: $font-size-normal;
+    line-height: $line-height-normal;
+  }
+  
+  &--small {
+    font-size: $font-size-small;
+    line-height: $line-height-normal;
+  }
+  
+  &--lead {
+    font-size: $font-size-normal;
+    line-height: $line-height-loose;
+    font-weight: $font-weight-medium;
+    color: $color-text-light;
+  }
+  
+  &--muted {
+    color: $color-text-muted;
+  }
+  
+  &--light {
+    color: $color-text-light;
+  }
+  
+  &--center {
+    text-align: center;
+  }
+  
+  &--justify {
+    text-align: justify;
+  }
+  
+  // Special text styles
+  &--gradient {
+    @include text-gradient;
+  }
+  
+  &--italic {
+    font-style: italic;
+  }
+  
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+  
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+  
+  &--uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  &--lowercase {
+    text-transform: lowercase;
+  }
+  
+  &--capitalize {
+    text-transform: capitalize;
+  }
+}
+
+// Links with BEM
+.link {
+  color: $color-primary;
+  text-decoration: none;
+  transition: all $transition-fast;
+  
+  &:hover {
+    color: kawaii-darken($color-primary, 10%);
+    text-decoration: underline;
+  }
+  
+  &:focus {
+    @include focus-ring;
+  }
+  
+  // Link modifiers
+  &--subtle {
+    color: $color-text;
+    
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  
+  &--bold {
+    font-weight: $font-weight-semibold;
+  }
+  
+  &--underline {
+    text-decoration: underline;
+    
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  
+  &--external {
+    &::after {
+      content: '↗';
+      margin-left: 0.25em;
+      font-size: 0.8em;
+      opacity: 0.7;
+    }
+  }
+}
+
+// Lists with BEM
+.list {
+  margin: 0 0 $spacing-base;
+  padding-left: $spacing-base;
+  
+  &--unstyled {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  &--inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-base;
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  &--kawaii {
+    list-style: none;
+    padding-left: 0;
+    
+    .list__item {
+      position: relative;
+      padding-left: $spacing-base;
+      margin-bottom: $spacing-sm;
+      
+      &::before {
+        content: '🌸';
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+  
+  // List item
+  &__item {
+    margin-bottom: $spacing-xs;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Blockquotes with BEM
+.blockquote {
+  margin: $spacing-lg 0;
+  padding: $spacing-base $spacing-lg;
+  border-left: 4px solid $color-primary;
+  background: alpha($color-primary, 0.05);
+  border-radius: 0 $border-radius-small $border-radius-small 0;
+  
+  &__text {
+    font-size: $font-size-normal;
+    font-style: italic;
+    line-height: $line-height-loose;
+    margin: 0 0 $spacing-base;
+    color: $color-text-light;
+  }
+  
+  &__cite {
+    font-size: $font-size-small;
+    font-style: normal;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    
+    &::before {
+      content: '— ';
+    }
+  }
+  
+  // Blockquote modifiers
+  &--large {
+    padding: $spacing-lg $spacing-xl;
+    
+    .blockquote__text {
+      font-size: $font-size-large;
+    }
+  }
+  
+  &--center {
+    text-align: center;
+    border: none;
+    border-top: 4px solid $color-primary;
+    border-bottom: 4px solid $color-primary;
+    border-radius: $border-radius-small;
+  }
+  
+  &--kawaii {
+    border-color: $color-kawaii-pink;
+    background: alpha($color-kawaii-pink, 0.1);
+    
+    &::before {
+      content: '💖';
+      font-size: $font-size-large;
+      margin-bottom: $spacing-sm;
+      display: block;
+    }
+  }
+}
+
+// Code with BEM
+.code {
+  font-family: $font-family-monospace;
+  font-size: $font-size-small;
+  background: $color-background-light;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-small;
+  border: 1px solid $color-border;
+  
+  // Inline code
+  &--inline {
+    display: inline;
+    color: kawaii-darken($color-primary, 20%);
+  }
+  
+  // Block code
+  &--block {
+    display: block;
+    padding: $spacing-base;
+    margin: $spacing-base 0;
+    overflow-x: auto;
+    line-height: $line-height-normal;
+    white-space: pre;
+  }
+}
+
+// Preformatted text
+.pre {
+  @extend .code--block;
+  font-family: $font-family-monospace;
+  white-space: pre-wrap;
+}
+
+// WordPress specific typography classes
+.wp-block-quote {
+  @extend .blockquote;
+}
+
+.wp-block-code {
+  @extend .code--block;
+}
+
+.wp-block-preformatted {
+  @extend .pre;
+}
+
+// Accessibility improvements
+.screen-reader-text {
+  @include visually-hidden;
+}
+
+// Skip link
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: $spacing-base;
+  z-index: $z-index-modal;
+  padding: $spacing-sm $spacing-base;
+  background: $color-text;
+  color: $color-white;
+  text-decoration: none;
+  border-radius: $border-radius-small;
+  transition: all $transition-fast;
+  
+  &:focus {
+    left: $spacing-base;
+  }
+}

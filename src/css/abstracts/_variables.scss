@@ -1,0 +1,181 @@
+// =============================================================================
+// KAWAII ULTRA THEME - DESIGN TOKENS
+// Variables extracted from theme.json for Sass usage
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// COLOR PALETTE
+// -----------------------------------------------------------------------------
+
+// Primary Kawaii Colors
+$color-hot-pink: #ff69b4;
+$color-kawaii-pink: #ffb6c1;
+$color-deep-pink: #ff1493;
+$color-pink: #ffc0cb;
+$color-salmon-pink: #ff91a4;
+
+// Accent Colors
+$color-plum: #dda0dd;
+$color-orchid: #da70d6;
+$color-medium-orchid: #ba55d3;
+$color-sky-blue: #87ceeb;
+$color-light-blue: #add8e6;
+$color-powder-blue: #b0e0e6;
+$color-pale-green: #98fb98;
+$color-honeydew: #f0fff0;
+$color-light-yellow: #ffffe0;
+$color-lavender-blush: #fff0f5;
+$color-alice-blue: #f0f8ff;
+$color-soft-pink: #fff5f8;
+
+// Neutral Colors
+$color-white: #ffffff;
+$color-light-gray: #f8f9fa;
+$color-gray-100: #e2e8f0;
+$color-gray-200: #cbd5e0;
+$color-gray-300: #a0aec0;
+$color-gray-400: #718096;
+$color-medium-gray: #4a5568;
+$color-dark-gray: #2d3748;
+$color-almost-black: #1a202c;
+
+// Color aliases for semantic usage
+$color-primary: $color-hot-pink;
+$color-secondary: $color-kawaii-pink;
+$color-accent: $color-deep-pink;
+$color-text: $color-dark-gray;
+$color-text-light: $color-medium-gray;
+$color-text-muted: $color-gray-400;
+$color-background: $color-white;
+$color-background-light: $color-light-gray;
+$color-border: $color-gray-100;
+
+// -----------------------------------------------------------------------------
+// GRADIENTS
+// -----------------------------------------------------------------------------
+
+$gradient-pink-to-deep-pink: linear-gradient(135deg, #{$color-hot-pink} 0%, #{$color-deep-pink} 100%);
+$gradient-light-pink-to-pink: linear-gradient(135deg, #{$color-kawaii-pink} 0%, #{$color-hot-pink} 100%);
+$gradient-kawaii-pink: linear-gradient(135deg, #{$color-pink} 0%, #{$color-kawaii-pink} 100%);
+$gradient-purple: linear-gradient(135deg, #{$color-plum} 0%, #{$color-orchid} 100%);
+$gradient-sky-blue: linear-gradient(135deg, #{$color-sky-blue} 0%, #{$color-light-blue} 100%);
+$gradient-kawaii-rainbow: linear-gradient(135deg, #{$color-hot-pink} 0%, #{$color-plum} 50%, #{$color-sky-blue} 100%);
+$gradient-soft-pastel: linear-gradient(135deg, #{$color-lavender-blush} 0%, #{$color-alice-blue} 100%);
+
+// -----------------------------------------------------------------------------
+// TYPOGRAPHY
+// -----------------------------------------------------------------------------
+
+// Font families (from theme.json)
+$font-family-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+$font-family-serif: Georgia, 'Times New Roman', Times, serif;
+$font-family-monospace: 'Courier New', Courier, monospace;
+
+// Font sizes (fluid typography from theme.json)
+$font-size-x-small: 0.875rem;
+$font-size-small: 1rem;
+$font-size-medium: 1.125rem;
+$font-size-normal: 1.25rem;
+$font-size-large: 1.5rem;
+$font-size-x-large: 2rem;
+$font-size-xx-large: 2.75rem;
+$font-size-xxx-large: 3.5rem;
+
+// Font weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Line heights
+$line-height-tight: 1.2;
+$line-height-normal: 1.6;
+$line-height-loose: 1.8;
+
+// -----------------------------------------------------------------------------
+// SPACING SCALE
+// -----------------------------------------------------------------------------
+
+$spacing-10: 0.25rem;  // 4px
+$spacing-15: 0.5rem;   // 8px
+$spacing-20: 1rem;     // 16px
+$spacing-30: 1.5rem;   // 24px
+$spacing-40: 2rem;     // 32px
+$spacing-45: 2.5rem;   // 40px
+$spacing-50: 3rem;     // 48px
+$spacing-60: 4rem;     // 64px
+$spacing-70: 5rem;     // 80px
+$spacing-80: 6rem;     // 96px
+$spacing-90: 8rem;     // 128px
+$spacing-100: 10rem;   // 160px
+
+// Semantic spacing aliases
+$spacing-xs: $spacing-10;
+$spacing-sm: $spacing-15;
+$spacing-base: $spacing-20;
+$spacing-md: $spacing-30;
+$spacing-lg: $spacing-40;
+$spacing-xl: $spacing-50;
+$spacing-2xl: $spacing-60;
+$spacing-3xl: $spacing-70;
+
+// Layout spacing
+$spacing-section: $spacing-70;  // 5rem
+$spacing-container: $spacing-40; // 2rem
+
+// -----------------------------------------------------------------------------
+// LAYOUT & CONTAINERS
+// -----------------------------------------------------------------------------
+
+$container-max-width: 1200px;
+$content-width: 800px;
+$wide-width: 1200px;
+
+// -----------------------------------------------------------------------------
+// BORDER RADIUS
+// -----------------------------------------------------------------------------
+
+$border-radius-small: 8px;
+$border-radius-medium: 15px;
+$border-radius-large: 25px;
+$border-radius-round: 50%;
+
+// -----------------------------------------------------------------------------
+// SHADOWS
+// -----------------------------------------------------------------------------
+
+$shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+$shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+// Kawaii-themed shadows
+$shadow-kawaii-soft: 0 2px 10px rgba(255, 105, 180, 0.15);
+$shadow-kawaii-medium: 0 4px 20px rgba(255, 105, 180, 0.2);
+$shadow-kawaii-strong: 0 8px 30px rgba(255, 105, 180, 0.25);
+
+// -----------------------------------------------------------------------------
+// TRANSITIONS
+// -----------------------------------------------------------------------------
+
+$transition-fast: 0.15s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// -----------------------------------------------------------------------------
+// BREAKPOINTS
+// -----------------------------------------------------------------------------
+
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1200px;
+
+// Z-index scale
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
