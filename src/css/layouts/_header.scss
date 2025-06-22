@@ -170,12 +170,19 @@
   
   &__search {
     &-toggle {
-      @extend .btn-icon;
-      @extend .btn-icon--ghost;
+      @include button-base;
+      background: transparent;
+      color: $color-text;
+      padding: $spacing-sm;
+      border-radius: 50%;
+      
+      &:hover {
+        background: alpha($color-primary, 0.1);
+      }
     }
     
     &-form {
-      @extend .search-form;
+      position: relative;
       
       &--visible {
         display: block;
@@ -207,9 +214,9 @@
   }
   
   &__cta {
-    @extend .btn;
-    @extend .btn--primary;
-    @extend .btn--small;
+    @include button-primary;
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-small;
     
     @include mobile-only {
       display: none;
@@ -268,9 +275,7 @@
     }
     
     &--button {
-      @extend .btn;
-      @extend .btn--ghost;
-      @extend .btn--small;
+      @include button-ghost;
       padding: $spacing-xs $spacing-sm;
     }
     
@@ -374,8 +379,11 @@
       position: absolute;
       top: $spacing-base;
       right: $spacing-base;
-      @extend .btn-icon;
-      @extend .btn-icon--ghost;
+      @include button-base;
+      background: transparent;
+      color: $color-text;
+      padding: $spacing-sm;
+      border-radius: 50%;
     }
     
     .nav__list {
@@ -413,8 +421,11 @@
   
   // Mobile menu toggle
   &__toggle {
-    @extend .btn-icon;
-    @extend .btn-icon--ghost;
+    @include button-base;
+    background: transparent;
+    color: $color-text;
+    padding: $spacing-sm;
+    border-radius: 50%;
     display: none;
     
     @include mobile-only {
@@ -491,8 +502,10 @@
     }
     
     .header__cta {
-      @extend .btn;
-      @extend .btn--large;
+      @include button-base;
+      @include button-kawaii-hover;
+      padding: $spacing-base $spacing-lg;
+      font-size: $font-size-large;
       background: $color-white;
       color: $color-primary;
       

@@ -242,8 +242,7 @@
 
 // Icon button specific styles
 .btn-icon {
-  @extend .btn;
-  
+  @include button-base;
   padding: $spacing-sm;
   width: auto;
   height: auto;
@@ -269,7 +268,7 @@
 
 // Toggle button
 .btn-toggle {
-  @extend .btn--ghost;
+  @include button-ghost;
   
   &--active {
     background: $color-primary;
@@ -284,16 +283,15 @@
 
 // Floating action button
 .btn-fab {
-  @extend .btn;
-  @extend .btn--primary;
-  @extend .btn--rounded;
-  
+  @include button-primary;
+  @include button-kawaii-hover;
   position: fixed;
   bottom: $spacing-lg;
   right: $spacing-lg;
   width: 56px;
   height: 56px;
   padding: 0;
+  border-radius: 50%;
   box-shadow: $shadow-strong;
   z-index: $z-index-fixed;
   

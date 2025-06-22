@@ -1,3 +1,10 @@
+// =============================================================================
+// KAWAII ULTRA THEME - ADMIN STYLESHEET
+// Admin and customizer styles using modular Sass architecture
+// =============================================================================
+
+@use 'abstracts' as *;
+
 /**
  * Admin CSS
  * 
@@ -5,36 +12,76 @@
  */
 
 .kawaii-ultra-admin-notice {
-    padding: 15px;
-    margin: 5px 0 15px;
-    border-left: 4px solid #0073aa;
-    background-color: #fff;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-}
-
-.kawaii-ultra-admin-notice.notice-success {
-    border-left-color: #46b450;
-}
-
-.kawaii-ultra-admin-notice.notice-warning {
-    border-left-color: #ffb900;
-}
-
-.kawaii-ultra-admin-notice.notice-error {
-    border-left-color: #dc3232;
+    padding: $spacing-base;
+    margin: $spacing-xs 0 $spacing-base;
+    border-left: 4px solid $color-primary;
+    background-color: $color-white;
+    box-shadow: $shadow-soft;
+    border-radius: $border-radius-small;
+    
+    &.notice-success {
+        border-left-color: $color-pale-green;
+    }
+    
+    &.notice-warning {
+        border-left-color: $color-light-yellow;
+    }
+    
+    &.notice-error {
+        border-left-color: #dc3232;
+    }
 }
 
 /* Customizer specific styles */
 .customize-control-kawaii-ultra-info {
-    margin-bottom: 15px;
+    margin-bottom: $spacing-base;
+    
+    .customize-control-title {
+        font-weight: $font-weight-semibold;
+        margin-bottom: $spacing-xs;
+        color: $color-text;
+    }
+    
+    .customize-control-description {
+        font-style: italic;
+        color: $color-text-muted;
+        font-size: $font-size-small;
+    }
 }
 
-.customize-control-kawaii-ultra-info .customize-control-title {
-    font-weight: 600;
-    margin-bottom: 5px;
+// Block editor admin styles
+.wp-admin {
+    .kawaii-ultra-block-panel {
+        padding: $spacing-base;
+        background: $color-background-light;
+        border-radius: $border-radius-small;
+        margin-bottom: $spacing-base;
+        
+        &__title {
+            font-weight: $font-weight-semibold;
+            margin-bottom: $spacing-sm;
+            color: $color-primary;
+        }
+        
+        &__description {
+            font-size: $font-size-small;
+            color: $color-text-muted;
+            margin-bottom: $spacing-base;
+        }
+    }
 }
 
-.customize-control-kawaii-ultra-info .customize-control-description {
-    font-style: italic;
-    color: #666;
+// Kawaii-style admin buttons
+.kawaii-admin-button {
+    @include button-base;
+    @include button-primary;
+    
+    &--secondary {
+        @include button-secondary;
+    }
+    
+    &--small {
+        padding: $spacing-xs $spacing-sm;
+        font-size: $font-size-small;
+    }
 }

@@ -1,0 +1,518 @@
+// =============================================================================
+// BLOCKS - CARD
+// Gutenberg card block using BEM methodology
+// =============================================================================
+
+@use '../abstracts' as *;
+
+// Kawaii Card Block
+.block-card {
+  @include card-base;
+  
+  // Card style modifiers
+  &--default {
+    @include card-kawaii-hover;
+  }
+  
+  &--minimal {
+    box-shadow: $shadow-soft;
+    border: 1px solid $color-border;
+    
+    &:hover {
+      box-shadow: $shadow-medium;
+      transform: translateY(-2px);
+    }
+  }
+  
+  &--cute {
+    background: $gradient-light-pink-to-pink;
+    background: linear-gradient(135deg, #fff0f8 0%, #ffe4e8 100%);
+    border: 2px solid $color-kawaii-pink;
+    position: relative;
+    
+    &::before {
+      content: '🌸';
+      position: absolute;
+      top: $spacing-base;
+      right: $spacing-base;
+      font-size: $font-size-large;
+      opacity: 0.7;
+      z-index: 1;
+    }
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-kawaii-medium;
+      
+      &::before {
+        @include kawaii-animation(kawaii-bounce, 0.6s);
+      }
+    }
+  }
+  
+  &--pastel {
+    background: $gradient-soft-pastel;
+    
+    &:hover {
+      background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+    }
+  }
+  
+  &--product {
+    border: none;
+    box-shadow: $shadow-strong;
+    
+    &:hover {
+      box-shadow: 0 8px 35px rgba(0, 0, 0, 0.2);
+      transform: translateY(-6px);
+    }
+  }
+  
+  &--elevated {
+    @include card-elevated;
+  }
+  
+  &--bordered {
+    border: 2px solid $color-border;
+    
+    &:hover {
+      border-color: $color-primary;
+    }
+  }
+  
+  &--outlined {
+    border: 2px solid $color-primary;
+    background: transparent;
+    
+    &:hover {
+      background: alpha($color-primary, 0.05);
+    }
+  }
+  
+  &--gradient {
+    background: $gradient-kawaii-rainbow;
+    color: $color-white;
+    
+    .block-card__title,
+    .block-card__text {
+      color: $color-white;
+    }
+  }
+  
+  &--flat {
+    box-shadow: none;
+    border: 1px solid $color-border;
+    
+    &:hover {
+      border-color: $color-primary;
+      box-shadow: $shadow-soft;
+    }
+  }
+  
+  // Size modifiers
+  &--small {
+    .block-card__content {
+      padding: $spacing-sm;
+    }
+  }
+  
+  &--large {
+    .block-card__content {
+      padding: $spacing-lg;
+    }
+  }
+  
+  // Layout modifiers
+  &--horizontal {
+    display: flex;
+    align-items: stretch;
+    
+    .block-card__image {
+      width: 40%;
+      height: auto;
+      border-radius: $border-radius-medium 0 0 $border-radius-medium;
+      
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .block-card__content-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .block-card__content {
+      flex: 1;
+    }
+    
+    @include mobile-only {
+      flex-direction: column;
+      
+      .block-card__image {
+        width: 100%;
+        height: 200px;
+        border-radius: $border-radius-medium $border-radius-medium 0 0;
+      }
+    }
+  }
+  
+  // Card elements
+  &__image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: $border-radius-medium $border-radius-medium 0 0;
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition-normal;
+    }
+    
+    &--square {
+      height: 250px;
+    }
+    
+    &--tall {
+      height: 300px;
+    }
+    
+    &--contained {
+      border-radius: $border-radius-small;
+      margin: $spacing-base;
+      width: calc(100% - #{$spacing-base * 2});
+      height: auto;
+      
+      img {
+        height: auto;
+      }
+    }
+    
+    &--rounded {
+      border-radius: $border-radius-medium;
+    }
+  }
+  
+  &__content {
+    padding: $spacing-base;
+    flex: 1;
+    
+    &--padded {
+      padding: $spacing-lg;
+    }
+    
+    &--compact {
+      padding: $spacing-sm;
+    }
+    
+    &--no-padding {
+      padding: 0;
+    }
+    
+    &--center {
+      text-align: center;
+    }
+  }
+  
+  &__header {
+    padding: $spacing-base;
+    border-bottom: 1px solid $color-border;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  &__footer {
+    padding: $spacing-base;
+    border-top: 1px solid $color-border;
+    background: alpha($color-background-light, 0.5);
+    
+    &:first-child {
+      border-top: none;
+      background: transparent;
+    }
+  }
+  
+  &__title {
+    @include heading-3;
+    margin: 0 0 $spacing-sm;
+    color: $color-text;
+    
+    &--large {
+      @include heading-2;
+    }
+    
+    &--small {
+      @include heading-4;
+    }
+    
+    &--gradient {
+      @include text-gradient;
+    }
+    
+    &--kawaii {
+      color: $color-primary;
+      
+      &::after {
+        content: ' ✨';
+        font-size: 0.8em;
+      }
+    }
+  }
+  
+  &__subtitle {
+    font-size: $font-size-small;
+    color: $color-text-muted;
+    margin: 0 0 $spacing-base;
+    font-weight: $font-weight-medium;
+    
+    &--large {
+      font-size: $font-size-medium;
+    }
+  }
+  
+  &__text {
+    font-size: $font-size-medium;
+    line-height: $line-height-normal;
+    color: $color-text-light;
+    margin: 0 0 $spacing-base;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    &--large {
+      font-size: $font-size-normal;
+      line-height: $line-height-loose;
+    }
+    
+    &--small {
+      font-size: $font-size-small;
+    }
+  }
+  
+  &__meta {
+    font-size: $font-size-small;
+    color: $color-text-muted;
+    margin-bottom: $spacing-sm;
+    
+    &-item {
+      display: inline-block;
+      margin-right: $spacing-base;
+      
+      &:last-child {
+        margin-right: 0;
+      }
+      
+      &::before {
+        content: '•';
+        margin-right: $spacing-xs;
+        color: $color-primary;
+      }
+      
+      &:first-child::before {
+        display: none;
+      }
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+    
+    &--right {
+      justify-content: flex-end;
+    }
+    
+    &--center {
+      justify-content: center;
+    }
+    
+    &--between {
+      justify-content: space-between;
+    }
+    
+    &--vertical {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+  
+  &__badge {
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+    padding: $spacing-xs $spacing-sm;
+    background: $color-primary;
+    color: $color-white;
+    font-size: $font-size-x-small;
+    font-weight: $font-weight-semibold;
+    border-radius: $border-radius-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+    
+    &--success {
+      background: $color-pale-green;
+      color: kawaii-darken($color-pale-green, 40%);
+    }
+    
+    &--warning {
+      background: $color-light-yellow;
+      color: kawaii-darken($color-light-yellow, 40%);
+    }
+    
+    &--kawaii {
+      background: $gradient-pink-to-deep-pink;
+      
+      &::after {
+        content: '✨';
+        margin-left: 0.25em;
+      }
+    }
+    
+    &--new {
+      background: $color-sky-blue;
+      color: $color-white;
+      
+      &::before {
+        content: '🆕 ';
+      }
+    }
+  }
+  
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: alpha($color-text, 0.8);
+    color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity $transition-normal;
+    border-radius: $border-radius-medium;
+    
+    &--visible {
+      opacity: 1;
+    }
+  }
+  
+  // Interactive states
+  &--clickable {
+    cursor: pointer;
+    
+    &:hover {
+      .block-card__image img {
+        transform: scale(1.05);
+      }
+      
+      .block-card__overlay {
+        opacity: 1;
+      }
+    }
+  }
+  
+  // Hover effects
+  &:hover {
+    .block-card__image img {
+      transform: scale(1.05);
+    }
+  }
+  
+  // Loading state
+  &--loading {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2rem;
+      height: 2rem;
+      margin: -1rem 0 0 -1rem;
+      border: 3px solid $color-border;
+      border-top-color: $color-primary;
+      border-radius: 50%;
+      animation: card-loading 1s linear infinite;
+      z-index: 2;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: alpha($color-white, 0.8);
+      border-radius: $border-radius-medium;
+      z-index: 1;
+    }
+  }
+  
+  // Responsive adjustments
+  @include mobile-only {
+    &__content {
+      padding: $spacing-sm;
+      
+      &--padded {
+        padding: $spacing-base;
+      }
+    }
+    
+    &__image {
+      height: 180px;
+      
+      &--square,
+      &--tall {
+        height: 180px;
+      }
+    }
+  }
+}
+
+// Block alignment utilities
+.wp-block-kawaii-ultra-card {
+  margin-bottom: $spacing-base;
+  
+  &.alignwide {
+    max-width: $wide-width;
+  }
+  
+  &.alignfull {
+    max-width: none;
+  }
+}
+
+// Card grid when multiple cards are used together
+.wp-block-group {
+  .block-card {
+    margin-bottom: $spacing-lg;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Animation keyframes
+@keyframes card-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

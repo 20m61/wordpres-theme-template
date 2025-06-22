@@ -1,0 +1,598 @@
+// =============================================================================
+// BLOCKS - GALLERY
+// Gutenberg gallery block using BEM methodology
+// =============================================================================
+
+@use '../abstracts' as *;
+
+// Kawaii Gallery Block
+.block-gallery {
+  display: grid;
+  gap: $spacing-base;
+  
+  // Column layout modifiers
+  &--columns-1 { 
+    grid-template-columns: 1fr; 
+  }
+  
+  &--columns-2 { 
+    grid-template-columns: repeat(2, 1fr); 
+    
+    @include mobile-only {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &--columns-3 { 
+    grid-template-columns: repeat(3, 1fr); 
+    
+    @include tablet-only {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include mobile-only {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &--columns-4 { 
+    grid-template-columns: repeat(4, 1fr); 
+    
+    @include desktop-and-up {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    @include tablet-only {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include mobile-only {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &--columns-5 { 
+    grid-template-columns: repeat(5, 1fr); 
+    
+    @include desktop-and-up {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    
+    @include tablet-only {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @include mobile-only {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  &--columns-6 { 
+    grid-template-columns: repeat(6, 1fr); 
+    
+    @include desktop-and-up {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    
+    @include tablet-only {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @include mobile-only {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  // Spacing modifiers
+  &--spacing-none { 
+    gap: 0; 
+  }
+  
+  &--spacing-small { 
+    gap: $spacing-sm; 
+  }
+  
+  &--spacing-medium { 
+    gap: $spacing-base; 
+  }
+  
+  &--spacing-large { 
+    gap: $spacing-lg; 
+  }
+  
+  &--spacing-xl { 
+    gap: $spacing-xl; 
+  }
+  
+  // Layout style modifiers
+  &--grid {
+    // Default grid layout
+  }
+  
+  &--masonry {
+    column-count: 3;
+    column-gap: $spacing-base;
+    
+    .block-gallery__item {
+      break-inside: avoid;
+      margin-bottom: $spacing-base;
+    }
+    
+    @include tablet-only {
+      column-count: 2;
+    }
+    
+    @include mobile-only {
+      column-count: 1;
+    }
+  }
+  
+  &--carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: $spacing-base;
+    padding-bottom: $spacing-sm; // For scrollbar space
+    
+    .block-gallery__item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: 300px;
+      
+      @include mobile-only {
+        width: 250px;
+      }
+    }
+    
+    // Hide scrollbar but keep functionality
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: $color-background-light;
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $color-primary;
+      border-radius: 3px;
+      
+      &:hover {
+        background: kawaii-darken($color-primary, 10%);
+      }
+    }
+  }
+  
+  &--collage {
+    // Creative collage layout using CSS Grid
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 200px);
+    
+    .block-gallery__item {
+      &:nth-child(1) {
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+      }
+      
+      &:nth-child(2) {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+      }
+      
+      &:nth-child(3) {
+        grid-column: 4 / 5;
+        grid-row: 1 / 2;
+      }
+      
+      &:nth-child(4) {
+        grid-column: 3 / 5;
+        grid-row: 2 / 3;
+      }
+      
+      &:nth-child(5) {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+      }
+      
+      &:nth-child(6) {
+        grid-column: 2 / 4;
+        grid-row: 3 / 4;
+      }
+      
+      &:nth-child(7) {
+        grid-column: 4 / 5;
+        grid-row: 3 / 4;
+      }
+    }
+    
+    @include tablet-only {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 150px);
+      
+      .block-gallery__item {
+        &:nth-child(1) {
+          grid-column: 1 / 3;
+          grid-row: 1 / 2;
+        }
+        
+        &:nth-child(2) {
+          grid-column: 1 / 2;
+          grid-row: 2 / 3;
+        }
+        
+        &:nth-child(3) {
+          grid-column: 2 / 3;
+          grid-row: 2 / 3;
+        }
+        
+        &:nth-child(4) {
+          grid-column: 1 / 3;
+          grid-row: 3 / 4;
+        }
+        
+        &:nth-child(n+5) {
+          grid-column: auto;
+          grid-row: auto;
+        }
+      }
+    }
+    
+    @include mobile-only {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      
+      .block-gallery__item {
+        grid-column: 1;
+        grid-row: auto;
+      }
+    }
+  }
+  
+  // Empty state
+  &--empty {
+    text-align: center;
+    padding: $spacing-3xl;
+    color: $color-text-muted;
+    font-style: italic;
+    border: 2px dashed $color-border;
+    border-radius: $border-radius-medium;
+    background: $color-background-light;
+    
+    &::before {
+      content: '📷';
+      display: block;
+      font-size: 3rem;
+      margin-bottom: $spacing-base;
+      opacity: 0.5;
+    }
+  }
+  
+  // Kawaii style modifier
+  &--kawaii {
+    gap: $spacing-sm;
+    
+    .block-gallery__item {
+      position: relative;
+      
+      &::after {
+        content: '✨';
+        position: absolute;
+        top: $spacing-xs;
+        right: $spacing-xs;
+        background: alpha($color-white, 0.9);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        opacity: 0;
+        transition: opacity $transition-normal;
+        z-index: 2;
+      }
+      
+      &:hover::after {
+        opacity: 1;
+      }
+    }
+  }
+  
+  // Gallery item
+  &__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: $border-radius-small;
+    transition: transform $transition-normal;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+    
+    &--featured {
+      grid-column: span 2;
+      grid-row: span 2;
+      
+      @include mobile-only {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+    }
+    
+    &--tall {
+      grid-row: span 2;
+    }
+    
+    &--wide {
+      grid-column: span 2;
+    }
+  }
+  
+  &__link {
+    display: block;
+    text-decoration: none;
+    position: relative;
+    
+    &:focus {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+    
+    &:hover {
+      .block-gallery__overlay {
+        opacity: 1;
+      }
+      
+      .block-gallery__image {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+    transition: transform $transition-normal;
+    
+    &--contain {
+      object-fit: contain;
+    }
+    
+    &--cover {
+      object-fit: cover;
+    }
+    
+    &--fill {
+      object-fit: fill;
+    }
+  }
+  
+  &__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: $color-white;
+    padding: $spacing-base;
+    font-size: $font-size-small;
+    transform: translateY(100%);
+    transition: transform $transition-normal;
+    
+    &--visible {
+      transform: translateY(0);
+    }
+    
+    &--kawaii {
+      background: linear-gradient(transparent, alpha($color-primary, 0.9));
+      
+      &::before {
+        content: '🌸 ';
+        margin-right: $spacing-xs;
+      }
+    }
+  }
+  
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: alpha($color-text, 0.6);
+    color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity $transition-normal;
+    border-radius: inherit;
+    
+    &-icon {
+      font-size: $font-size-large;
+      
+      &--play {
+        &::before {
+          content: '▶️';
+        }
+      }
+      
+      &--zoom {
+        &::before {
+          content: '🔍';
+        }
+      }
+      
+      &--expand {
+        &::before {
+          content: '⛶';
+        }
+      }
+    }
+  }
+  
+  // Show captions on hover
+  &:hover &__caption {
+    transform: translateY(0);
+  }
+  
+  // Loading state
+  &--loading {
+    .block-gallery__item {
+      background: $color-background-light;
+      position: relative;
+      min-height: 200px;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 2rem;
+        height: 2rem;
+        margin: -1rem 0 0 -1rem;
+        border: 3px solid $color-border;
+        border-top-color: $color-primary;
+        border-radius: 50%;
+        animation: gallery-loading 1s linear infinite;
+      }
+    }
+  }
+  
+  // Lightbox integration
+  &--lightbox {
+    .block-gallery__link {
+      cursor: zoom-in;
+    }
+  }
+}
+
+// Gallery navigation for carousel
+.block-gallery__nav {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-sm;
+  margin-top: $spacing-base;
+  
+  &-button {
+    @include button-base;
+    background: alpha($color-primary, 0.1);
+    color: $color-primary;
+    padding: $spacing-sm;
+    border-radius: 50%;
+    
+    &:hover {
+      background: $color-primary;
+      color: $color-white;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    &--prev,
+    &--next {
+      background: alpha($color-primary, 0.1);
+      color: $color-primary;
+      
+      &:hover {
+        background: $color-primary;
+        color: $color-white;
+      }
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+  
+  &-dots {
+    display: flex;
+    gap: $spacing-xs;
+    align-items: center;
+  }
+  
+  &-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: alpha($color-primary, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all $transition-fast;
+    
+    &--active {
+      background: $color-primary;
+      transform: scale(1.2);
+    }
+    
+    &:hover {
+      background: $color-primary;
+    }
+  }
+}
+
+// WordPress Gallery Block integration
+.wp-block-gallery {
+  &.is-kawaii-style {
+    @extend .block-gallery--kawaii;
+  }
+  
+  &.has-nested-images {
+    .wp-block-image {
+      @extend .block-gallery__item;
+    }
+  }
+}
+
+// Animation keyframes
+@keyframes gallery-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive adjustments
+@include tablet-only {
+  .block-gallery {
+    &--columns-3,
+    &--columns-4,
+    &--columns-5,
+    &--columns-6 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@include mobile-only {
+  .block-gallery {
+    &--columns-2,
+    &--columns-3,
+    &--columns-4,
+    &--columns-5,
+    &--columns-6 {
+      grid-template-columns: 1fr !important;
+    }
+    
+    &__caption {
+      font-size: $font-size-x-small;
+      padding: $spacing-sm;
+    }
+    
+    &--carousel {
+      .block-gallery__item {
+        width: 200px;
+      }
+    }
+  }
+}
