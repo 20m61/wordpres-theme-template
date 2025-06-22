@@ -1,0 +1,23 @@
+{
+    "name": "20m61/kawaiiultra-functionality",
+    "description": "Companion plugin for KawaiiUltra theme providing custom post types, taxonomies, and business logic functionality",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "20m61",
+            "email": "20m61@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "KawaiiUltra\\Functionality\\": "inc/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
