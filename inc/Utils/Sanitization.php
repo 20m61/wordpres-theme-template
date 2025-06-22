@@ -51,7 +51,11 @@ class Sanitization {
      * @return string Sanitized text.
      */
     public function sanitize_text(string $input): string {
-        return wp_kses_post(force_balance_tags($input));
+        if (function_exists('wp_kses_post') && function_exists('force_balance_tags')) {
+            return wp_kses_post(force_balance_tags($input));
+        }
+        
+        return strip_tags($input, '<p><br><strong><em><a><ul><ol><li>');
     }
 
     /**
@@ -62,7 +66,9 @@ class Sanitization {
      * @return string Sanitized text.
      */
     public function sanitize_text_field(string $input): string {
-        return sanitize_text_field($input);
+        return function_exists('sanitize_text_field') 
+            ? sanitize_text_field($input) 
+            : trim(strip_tags($input));
     }
 
     /**
@@ -73,7 +79,9 @@ class Sanitization {
      * @return string Sanitized URL.
      */
     public function sanitize_url(string $input): string {
-        return esc_url_raw($input);
+        return function_exists('esc_url_raw') 
+            ? esc_url_raw($input) 
+            : filter_var($input, FILTER_SANITIZE_URL);
     }
 
     /**
@@ -84,7 +92,9 @@ class Sanitization {
      * @return string Sanitized email.
      */
     public function sanitize_email(string $input): string {
-        return sanitize_email($input);
+        return function_exists('sanitize_email') 
+            ? sanitize_email($input) 
+            : filter_var($input, FILTER_SANITIZE_EMAIL);
     }
 
     /**
@@ -95,7 +105,16 @@ class Sanitization {
      * @return string Sanitized hex color.
      */
     public function sanitize_hex_color(string $color): string {
-        return sanitize_hex_color($color);
+        if (function_exists('sanitize_hex_color')) {
+            return sanitize_hex_color($color);
+        }
+        
+        $color = ltrim($color, '#');
+        if (ctype_xdigit($color) && (strlen($color) === 3 || strlen($color) === 6)) {
+            return '#' . $color;
+        }
+        
+        return '';
     }
 
     /**
@@ -106,7 +125,7 @@ class Sanitization {
      * @return int Sanitized integer.
      */
     public function sanitize_integer($input): int {
-        return absint($input);
+        return function_exists('absint') ? absint($input) : abs((int) $input);
     }
 
     /**
@@ -128,7 +147,9 @@ class Sanitization {
      * @return string Sanitized textarea content.
      */
     public function sanitize_textarea(string $input): string {
-        return sanitize_textarea_field($input);
+        return function_exists('sanitize_textarea_field') 
+            ? sanitize_textarea_field($input) 
+            : trim(strip_tags($input));
     }
 
     /**
@@ -140,11 +161,16 @@ class Sanitization {
      * @return string Sanitized HTML.
      */
     public function sanitize_html(string $input, array $allowed_tags = []): string {
-        if (empty($allowed_tags)) {
-            $allowed_tags = wp_kses_allowed_html('post');
+        if (function_exists('wp_kses')) {
+            if (empty($allowed_tags)) {
+                $allowed_tags = function_exists('wp_kses_allowed_html') 
+                    ? wp_kses_allowed_html('post') 
+                    : [];
+            }
+            return wp_kses($input, $allowed_tags);
         }
 
-        return wp_kses($input, $allowed_tags);
+        return strip_tags($input, '<p><br><strong><em><a><ul><ol><li><h1><h2><h3><h4><h5><h6>');
     }
 
     /**
