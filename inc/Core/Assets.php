@@ -98,8 +98,15 @@ class Assets {
      * @return void
      */
     public function admin_scripts(string $hook): void {
-        // Only load on customizer and theme option pages
-        if (!in_array($hook, ['customize.php', 'appearance_page_theme-options'], true)) {
+        // Load on customizer, theme option pages, and appearance pages
+        $allowed_hooks = [
+            'customize.php',
+            'appearance_page_theme-options',
+            'themes.php',
+            'widgets.php'
+        ];
+        
+        if (!in_array($hook, $allowed_hooks, true)) {
             return;
         }
 
