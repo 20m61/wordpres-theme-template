@@ -6,6 +6,7 @@ A companion plugin for the KawaiiUltra WordPress theme that provides functionali
 
 - **Custom Post Types**: Portfolio items and Testimonials
 - **Custom Taxonomies**: Portfolio categories, portfolio tags, and testimonial categories
+- **Shortcodes**: Non-design related shortcodes for displaying content
 - **REST API Support**: All custom post types and taxonomies are available via WordPress REST API
 - **Translation Ready**: Full internationalization support
 
@@ -61,6 +62,55 @@ When using with KawaiiUltra theme, the following template files are available:
 - `single-testimonial.php` - Single testimonial template
 - `archive-testimonial.php` - Testimonials archive template
 - `taxonomy-portfolio_category.php` - Portfolio category archive template
+
+## Shortcodes
+
+The plugin provides several shortcodes for displaying content:
+
+### [portfolio_list]
+Displays a list of portfolio items.
+
+**Attributes:**
+- `limit` (default: 6) - Number of items to display
+- `category` - Portfolio category slug to filter by
+- `columns` (default: 3) - Number of columns (1-6)
+- `show_excerpt` (default: true) - Whether to show excerpts
+
+**Examples:**
+```
+[portfolio_list limit="8" columns="4"]
+[portfolio_list category="web-design" limit="4"]
+[portfolio_list show_excerpt="false" columns="2"]
+```
+
+### [recent_testimonials]
+Displays recent testimonials.
+
+**Attributes:**
+- `limit` (default: 3) - Number of testimonials to display
+- `category` - Testimonial category slug to filter by
+- `show_author` (default: true) - Whether to show author information
+
+**Examples:**
+```
+[recent_testimonials limit="5"]
+[recent_testimonials category="client-feedback" limit="2"]
+[recent_testimonials show_author="false"]
+```
+
+### [portfolio_categories]
+Displays a list of portfolio categories.
+
+**Attributes:**
+- `show_count` (default: true) - Whether to show post counts
+- `orderby` (default: name) - How to order categories
+- `order` (default: ASC) - Sort order
+
+**Examples:**
+```
+[portfolio_categories]
+[portfolio_categories show_count="false" orderby="count" order="DESC"]
+```
 
 ## Development
 

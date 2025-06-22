@@ -12,6 +12,7 @@ namespace KawaiiUltra\Functionality\Core;
 
 use KawaiiUltra\Functionality\Features\CustomPostTypes;
 use KawaiiUltra\Functionality\Features\CustomTaxonomies;
+use KawaiiUltra\Functionality\Features\Shortcodes;
 
 /**
  * Plugin core class
@@ -35,6 +36,13 @@ class Plugin {
     private $custom_taxonomies;
 
     /**
+     * Shortcodes instance
+     *
+     * @var Shortcodes
+     */
+    private $shortcodes;
+
+    /**
      * Constructor
      *
      * Initialize plugin components.
@@ -44,6 +52,7 @@ class Plugin {
     public function __construct() {
         $this->custom_post_types = new CustomPostTypes();
         $this->custom_taxonomies = new CustomTaxonomies();
+        $this->shortcodes = new Shortcodes();
     }
 
     /**
@@ -58,6 +67,7 @@ class Plugin {
         // Initialize feature components
         $this->custom_post_types->init();
         $this->custom_taxonomies->init();
+        $this->shortcodes->init();
 
         // Add admin notices
         add_action('admin_notices', [$this, 'activation_notice']);
@@ -117,5 +127,15 @@ class Plugin {
      */
     public function get_custom_taxonomies(): CustomTaxonomies {
         return $this->custom_taxonomies;
+    }
+
+    /**
+     * Get shortcodes instance
+     *
+     * @since 1.0.0
+     * @return Shortcodes
+     */
+    public function get_shortcodes(): Shortcodes {
+        return $this->shortcodes;
     }
 }
