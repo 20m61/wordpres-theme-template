@@ -359,20 +359,54 @@ class BlocksManager {
      * @return void
      */
     public function enqueue_block_editor_assets(): void {
-        wp_enqueue_script(
-            'kawaii-ultra-blocks',
-            get_template_directory_uri() . '/js/blocks.js',
-            ['wp-blocks', 'wp-components', 'wp-element', 'wp-editor'],
-            wp_get_theme()->get('Version'),
-            true
-        );
-
-        wp_enqueue_style(
-            'kawaii-ultra-blocks-editor',
-            get_template_directory_uri() . '/css/blocks-editor.css',
-            [],
-            wp_get_theme()->get('Version')
-        );
+        // Load Vite manifest for asset URLs
+        $manifest_path = get_template_directory() . '/dist/.vite/manifest.json';
+        $is_dev = defined('WP_DEBUG') && WP_DEBUG && !file_exists($manifest_path);
+        
+        if ($is_dev) {
+            // Development mode - load from Vite dev server
+            wp_enqueue_script(
+                'kawaii-ultra-blocks',
+                'http://localhost:3000/src/js/blocks.js',
+                ['wp-blocks', 'wp-components', 'wp-element', 'wp-editor'],
+                null,
+                true
+            );
+            
+            wp_enqueue_style(
+                'kawaii-ultra-blocks-editor',
+                'http://localhost:3000/src/css/blocks-editor.scss',
+                [],
+                null
+            );
+        } else {
+            // Production mode - load compiled assets
+            $manifest = file_exists($manifest_path) ? json_decode(file_get_contents($manifest_path), true) : null;
+            
+            if ($manifest) {
+                $blocks_js = $manifest['src/js/blocks.js']['file'] ?? null;
+                $blocks_editor_css = $manifest['src/css/blocks-editor.scss']['file'] ?? null;
+                
+                if ($blocks_js) {
+                    wp_enqueue_script(
+                        'kawaii-ultra-blocks',
+                        get_template_directory_uri() . '/dist/' . $blocks_js,
+                        ['wp-blocks', 'wp-components', 'wp-element', 'wp-editor'],
+                        null,
+                        true
+                    );
+                }
+                
+                if ($blocks_editor_css) {
+                    wp_enqueue_style(
+                        'kawaii-ultra-blocks-editor',
+                        get_template_directory_uri() . '/dist/' . $blocks_editor_css,
+                        [],
+                        null
+                    );
+                }
+            }
+        }
     }
 
     /**
@@ -382,20 +416,54 @@ class BlocksManager {
      * @return void
      */
     public function enqueue_block_assets(): void {
-        wp_enqueue_style(
-            'kawaii-ultra-blocks',
-            get_template_directory_uri() . '/css/blocks.css',
-            [],
-            wp_get_theme()->get('Version')
-        );
-
-        wp_enqueue_script(
-            'kawaii-ultra-blocks-frontend',
-            get_template_directory_uri() . '/js/blocks-frontend.js',
-            ['jquery'],
-            wp_get_theme()->get('Version'),
-            true
-        );
+        // Load Vite manifest for asset URLs
+        $manifest_path = get_template_directory() . '/dist/.vite/manifest.json';
+        $is_dev = defined('WP_DEBUG') && WP_DEBUG && !file_exists($manifest_path);
+        
+        if ($is_dev) {
+            // Development mode - load from Vite dev server
+            wp_enqueue_style(
+                'kawaii-ultra-blocks',
+                'http://localhost:3000/src/css/blocks.scss',
+                [],
+                null
+            );
+            
+            wp_enqueue_script(
+                'kawaii-ultra-blocks-frontend',
+                'http://localhost:3000/src/js/blocks-frontend.js',
+                ['jquery'],
+                null,
+                true
+            );
+        } else {
+            // Production mode - load compiled assets
+            $manifest = file_exists($manifest_path) ? json_decode(file_get_contents($manifest_path), true) : null;
+            
+            if ($manifest) {
+                $blocks_css = $manifest['src/css/blocks.scss']['file'] ?? null;
+                $blocks_frontend_js = $manifest['src/js/blocks-frontend.js']['file'] ?? null;
+                
+                if ($blocks_css) {
+                    wp_enqueue_style(
+                        'kawaii-ultra-blocks',
+                        get_template_directory_uri() . '/dist/' . $blocks_css,
+                        [],
+                        null
+                    );
+                }
+                
+                if ($blocks_frontend_js) {
+                    wp_enqueue_script(
+                        'kawaii-ultra-blocks-frontend',
+                        get_template_directory_uri() . '/dist/' . $blocks_frontend_js,
+                        ['jquery'],
+                        null,
+                        true
+                    );
+                }
+            }
+        }
     }
 
     /**

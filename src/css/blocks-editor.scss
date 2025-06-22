@@ -1,0 +1,72 @@
+/* 
+ * Kawaii Ultra - Block Editor CSS
+ * Styles for blocks in the WordPress editor
+ */
+
+/* ==========================================================================
+   Editor-specific Block Styles
+   ========================================================================== */
+
+/* Make blocks look consistent in the editor */
+.wp-block[data-type="kawaii-ultra/button"],
+.wp-block[data-type="kawaii-ultra/card"],
+.wp-block[data-type="kawaii-ultra/gallery"] {
+    margin: 1rem 0;
+}
+
+/* Button block editor styles */
+.editor-styles-wrapper .kawaii-button {
+    pointer-events: none; /* Prevent clicks in editor */
+}
+
+/* Card block editor styles */
+.editor-styles-wrapper .kawaii-card {
+    max-width: 100%;
+}
+
+/* Gallery block editor styles */
+.editor-styles-wrapper .kawaii-gallery--empty {
+    border: 2px dashed #e2e8f0;
+    border-radius: 10px;
+    background: #f7fafc;
+}
+
+/* ==========================================================================
+   Editor UI Enhancements
+   ========================================================================== */
+
+/* Custom block category styling */
+.block-editor-inserter__panel-content .components-panel__body-title {
+    font-weight: 600;
+}
+
+/* Kawaii block icons in inserter */
+.block-editor-block-types-list__item[data-id*="kawaii-ultra"] .block-editor-block-types-list__item-icon {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    color: white;
+    border-radius: 8px;
+}
+
+/* ==========================================================================
+   Block Variations Preview
+   ========================================================================== */
+
+.block-editor-block-variation-picker .block-editor-block-variation-picker__variation {
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.block-editor-block-variation-picker .block-editor-block-variation-picker__variation:hover {
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Responsive Editor Styles
+   ========================================================================== */
+
+@media (max-width: 782px) {
+    .editor-styles-wrapper .kawaii-gallery {
+        grid-template-columns: 1fr !important;
+    }
+}

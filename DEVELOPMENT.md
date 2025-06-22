@@ -1,11 +1,13 @@
 # Development Guide
 
-This guide provides information on developing with the KawaiiUltra WordPress theme, including Composer usage, coding standards, and testing.
+This guide provides information on developing with the KawaiiUltra WordPress theme, including Composer usage, Vite build system, coding standards, and testing.
 
 ## Prerequisites
 
 - PHP 7.4 or higher
 - Composer 2.0 or higher
+- Node.js 16.0 or higher
+- npm 7.0 or higher  
 - WordPress 5.0 or higher
 
 ## Getting Started
@@ -15,14 +17,30 @@ This guide provides information on developing with the KawaiiUltra WordPress the
 For production deployment:
 ```bash
 composer install --no-dev --optimize-autoloader
+npm install --production
+npm run build
 ```
 
 For development:
 ```bash
 composer install
+npm install
 ```
 
-### 2. Autoloading
+### 2. Build System
+
+The theme uses Vite for modern asset compilation. See [BUILD.md](BUILD.md) for detailed information.
+
+**Quick Start:**
+```bash
+# Development with HMR
+npm run dev
+
+# Production build
+npm run build
+```
+
+### 3. Autoloading
 
 The theme uses PSR-4 autoloading with Composer. All classes in the `inc/` directory are automatically loaded using the `KawaiiUltra\Theme\` namespace.
 
