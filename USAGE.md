@@ -1,8 +1,16 @@
 # Usage Examples
 
-This document provides examples of how to use the refactored KawaiiUltra theme's OOP architecture.
+This document provides examples of how to use the refactored KawaiiUltra theme's OOP architecture and component system.
 
-## Basic Usage
+## Table of Contents
+
+1. [Basic Theme Usage](#basic-theme-usage)
+2. [Kawaii Components System](#kawaii-components-system)
+3. [Extending the Theme](#extending-the-theme)
+4. [Hook Integration](#hook-integration)
+5. [Migration Path](#migration-path)
+
+## Basic Theme Usage
 
 The theme automatically bootstraps itself when WordPress loads. No additional setup is required.
 
@@ -12,6 +20,53 @@ require_once get_template_directory() . '/vendor/autoload.php';
 
 $theme = new \KawaiiUltra\Theme\Core\Theme();
 $theme->init();
+```
+
+## Kawaii Components System
+
+The theme includes a comprehensive component system for creating kawaii-styled content through the WordPress block editor.
+
+### Quick Start with Components
+
+For detailed usage, see [COMPONENTS.md](COMPONENTS.md) and [COMPONENTS-EXAMPLES.md](COMPONENTS-EXAMPLES.md).
+
+#### Using Custom Blocks
+
+```html
+<!-- Kawaii Button -->
+<!-- wp:kawaii-ultra/button {"text":"Get Started! ✨","style":"primary","size":"large"} /-->
+
+<!-- Kawaii Card -->
+<!-- wp:kawaii-ultra/card {"title":"Welcome 🌸","content":"Cute content here!","style":"cute"} /-->
+
+<!-- Kawaii Gallery -->
+<!-- wp:kawaii-ultra/gallery {"columns":3,"style":"grid","lightbox":true} /-->
+```
+
+#### Using Block Patterns
+
+1. In the WordPress editor, click the "+" button
+2. Go to "Patterns" tab
+3. Find "Kawaii Hero Sections", "Kawaii Call-to-Action", or "Kawaii Features"
+4. Click to insert pre-designed layouts
+
+#### Accessing Component Managers
+
+```php
+$theme = new \KawaiiUltra\Theme\Core\Theme();
+$theme->init();
+
+// Access different component managers
+$blocks_manager = $theme->get_blocks_manager();
+$patterns_manager = $theme->get_patterns_manager();
+$template_parts_manager = $theme->get_template_parts_manager();
+$variations_manager = $theme->get_variations_manager();
+
+// Get registered blocks
+$registered_blocks = $blocks_manager->get_registered_blocks();
+
+// Get available template parts
+$template_parts = $template_parts_manager->get_available_template_parts();
 ```
 
 ## Extending the Theme

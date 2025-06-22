@@ -87,6 +87,21 @@ class Setup {
 
         // Enqueue editor styles
         add_editor_style('style-editor.css');
+
+        // Add support for block editor
+        add_theme_support('wp-block-styles');
+
+        // Add support for responsive embeds
+        add_theme_support('responsive-embeds');
+
+        // Add support for custom line height
+        add_theme_support('custom-line-height');
+
+        // Add support for custom units
+        add_theme_support('custom-units');
+
+        // Add support for custom spacing
+        add_theme_support('custom-spacing');
     }
 
     /**
