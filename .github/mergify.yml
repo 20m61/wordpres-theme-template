@@ -1,0 +1,56 @@
+pull_request_rules:
+  # Auto-merge Dependabot PRs for patch updates
+  - name: Auto-merge Dependabot patch updates
+    conditions:
+      - author=dependabot[bot]
+      - check-success=CI
+      - title~=^\[Security\]|^composer\(deps\): bump .* from .* to .*
+      - body~=Bumps .* from .* to .*
+      - "#commits=1"
+      - "#files<=10"
+    actions:
+      merge:
+        method: squash
+
+  # Auto-merge Dependabot minor updates after approval
+  - name: Auto-merge approved Dependabot minor updates
+    conditions:
+      - author=dependabot[bot]
+      - check-success=CI
+      - "#approved-reviews-by>=1"
+      - title~=^composer\(deps-dev\): bump .* from .* to .*
+      - "#commits=1"
+    actions:
+      merge:
+        method: squash
+
+  # Auto-assign PRs to maintainer
+  - name: Auto-assign PRs
+    conditions:
+      - author!=dependabot[bot]
+      - -draft
+    actions:
+      assign:
+        users:
+          - 20m61
+
+  # Auto-label dependency PRs
+  - name: Label dependency PRs
+    conditions:
+      - author=dependabot[bot]
+    actions:
+      label:
+        add:
+          - dependencies
+          - automated-pr
+
+  # Request review for non-dependency PRs
+  - name: Request review for regular PRs
+    conditions:
+      - author!=dependabot[bot]
+      - -draft
+      - "#approved-reviews-by=0"
+    actions:
+      request_reviews:
+        users:
+          - 20m61
