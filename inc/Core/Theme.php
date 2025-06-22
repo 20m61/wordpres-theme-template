@@ -13,6 +13,10 @@ namespace KawaiiUltra\Theme\Core;
 use KawaiiUltra\Theme\Core\Assets;
 use KawaiiUltra\Theme\Core\Setup;
 use KawaiiUltra\Theme\Admin\Customizer;
+use KawaiiUltra\Theme\Blocks\BlocksManager;
+use KawaiiUltra\Theme\Blocks\PatternsManager;
+use KawaiiUltra\Theme\Blocks\TemplatePartsManager;
+use KawaiiUltra\Theme\Blocks\VariationsManager;
 
 /**
  * Main Theme class
@@ -57,6 +61,34 @@ class Theme {
     private $customizer;
 
     /**
+     * Blocks manager instance
+     *
+     * @var BlocksManager
+     */
+    private $blocks_manager;
+
+    /**
+     * Patterns manager instance
+     *
+     * @var PatternsManager
+     */
+    private $patterns_manager;
+
+    /**
+     * Template parts manager instance
+     *
+     * @var TemplatePartsManager
+     */
+    private $template_parts_manager;
+
+    /**
+     * Variations manager instance
+     *
+     * @var VariationsManager
+     */
+    private $variations_manager;
+
+    /**
      * Constructor
      *
      * Initialize theme components and hooks.
@@ -67,6 +99,10 @@ class Theme {
         $this->setup = new Setup();
         $this->assets = new Assets();
         $this->customizer = new Customizer();
+        $this->blocks_manager = new BlocksManager();
+        $this->patterns_manager = new PatternsManager();
+        $this->template_parts_manager = new TemplatePartsManager();
+        $this->variations_manager = new VariationsManager();
     }
 
     /**
@@ -82,6 +118,12 @@ class Theme {
         $this->setup->init();
         $this->assets->init();
         $this->customizer->init();
+
+        // Initialize blocks and patterns system
+        $this->blocks_manager->init();
+        $this->patterns_manager->init();
+        $this->template_parts_manager->init();
+        $this->variations_manager->init();
 
         // Add theme-specific hooks
         add_action('after_setup_theme', [$this, 'load_textdomain']);
@@ -226,11 +268,51 @@ class Theme {
             case 'portfolio_categories':
                 return taxonomy_exists('portfolio_category');
             case 'portfolio_tags':
-                return taxonomy_exists('portfolio_tag');
+                return taxonomy_exists('portfolio_tag');    
             case 'testimonial_categories':
                 return taxonomy_exists('testimonial_category');
             default:
                 return false;
         }
+    }
+
+    /**
+     * Get blocks manager instance
+     *
+     * @since 1.0.0
+     * @return BlocksManager
+     */
+    public function get_blocks_manager(): BlocksManager {
+        return $this->blocks_manager;
+    }
+
+    /**
+     * Get patterns manager instance
+     *
+     * @since 1.0.0
+     * @return PatternsManager
+     */
+    public function get_patterns_manager(): PatternsManager {
+        return $this->patterns_manager;
+    }
+
+    /**
+     * Get template parts manager instance
+     *
+     * @since 1.0.0
+     * @return TemplatePartsManager
+     */
+    public function get_template_parts_manager(): TemplatePartsManager {
+        return $this->template_parts_manager;
+    }
+
+    /**
+     * Get variations manager instance
+     *
+     * @since 1.0.0
+     * @return VariationsManager
+     */
+    public function get_variations_manager(): VariationsManager {
+        return $this->variations_manager;
     }
 }
