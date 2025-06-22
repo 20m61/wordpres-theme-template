@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<ruleset name="KawaiiUltra WordPress Theme">
+    <description>WordPress coding standards for KawaiiUltra theme</description>
+
+    <!-- Files to check -->
+    <file>.</file>
+
+    <!-- Exclude vendor directory -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+    <exclude-pattern>tests/*</exclude-pattern>
+
+    <!-- WordPress coding standards -->
+    <rule ref="WordPress">
+        <!-- Allow short array syntax -->
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+        <!-- Allow short open tags in templates -->
+        <exclude name="Generic.PHP.DisallowShortOpenTag.EchoFound"/>
+    </rule>
+
+    <!-- WordPress theme specific rules -->
+    <rule ref="WordPress-Theme">
+        <!-- Allow short array syntax -->
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+    </rule>
+
+    <!-- Set minimum PHP version -->
+    <config name="minimum_supported_wp_version" value="5.0"/>
+    <config name="testVersion" value="7.4-"/>
+
+    <!-- Check for PHP cross-version compatibility -->
+    <rule ref="PHPCompatibilityWP"/>
+
+    <!-- Additional WordPress rules -->
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array" value="kawaii-ultra"/>
+        </properties>
+    </rule>
+
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array" value="kawaii_ultra,KawaiiUltra"/>
+        </properties>
+    </rule>
+
+    <!-- Allow template files to use filename with underscores -->
+    <rule ref="WordPress.Files.FileName.InvalidClassFileName">
+        <exclude-pattern>*</exclude-pattern>
+    </rule>
+
+    <!-- Show colors in output -->
+    <arg name="colors"/>
+    <!-- Show progress -->
+    <arg value="p"/>
+    <!-- Show sniff codes -->
+    <arg value="s"/>
+</ruleset>

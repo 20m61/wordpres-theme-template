@@ -1,0 +1,18 @@
+parameters:
+    level: 5
+    paths:
+        - inc/
+        - functions.php
+    excludePaths:
+        - vendor/
+    ignoreErrors:
+        # WordPress functions may not be available during static analysis
+        - '#Function [a-zA-Z_]+\(\) not found#'
+        # WordPress constants may not be defined during static analysis
+        - '#Constant [A-Z_]+ not found#'
+        # Allow WordPress globals
+        - '#Undefined variable: \$[a-zA-Z_]+#'
+    bootstrapFiles:
+        - vendor/autoload.php
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false

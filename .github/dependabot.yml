@@ -1,0 +1,41 @@
+# Configuration file for Dependabot dependency updates
+# See https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
+
+version: 2
+updates:
+  # Enable Composer dependency updates
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "20m61"
+    reviewers:
+      - "20m61"
+    commit-message:
+      prefix: "composer"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "composer"
+    
+  # Enable GitHub Actions workflow updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 3
+    assignees:
+      - "20m61"
+    reviewers:
+      - "20m61"
+    commit-message:
+      prefix: "github-actions"
+    labels:
+      - "dependencies"
+      - "github-actions"
