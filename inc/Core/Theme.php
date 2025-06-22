@@ -89,6 +89,9 @@ class Theme {
         add_filter('body_class', [$this, 'body_classes']);
         add_filter('excerpt_length', [$this, 'excerpt_length'], 999);
         add_filter('excerpt_more', [$this, 'excerpt_more']);
+
+        // Add plugin dependency checks
+        add_action('admin_notices', [$this, 'plugin_dependency_notice']);
     }
 
     /**
@@ -178,5 +181,56 @@ class Theme {
      */
     public function get_text_domain(): string {
         return self::TEXT_DOMAIN;
+    }
+
+    /**
+     * Show plugin dependency notice
+     *
+     * @since 1.0.0
+     * @return void
+     */
+    public function plugin_dependency_notice(): void {
+        // Check if KawaiiUltra Functionality plugin is active
+        if (!class_exists('KawaiiUltra_Functionality') && current_user_can('install_plugins')) {
+            $plugin_name = 'KawaiiUltra Functionality';
+            $plugin_slug = 'kawaiiultra-functionality';
+            
+            $message = sprintf(
+                /* translators: 1: Theme name, 2: Plugin name, 3: Plugin install URL */
+                __('The <strong>%1$s</strong> theme works best with the <strong>%2$s</strong> plugin. <a href="%3$s" class="button button-primary">Install Plugin</a>', 'kawaii-ultra'),
+                'KawaiiUltra',
+                $plugin_name,
+                admin_url('plugin-install.php?tab=upload')
+            );
+
+            printf(
+                '<div class="notice notice-info is-dismissible"><p>%s</p></div>',
+                wp_kses_post($message)
+            );
+        }
+    }
+
+    /**
+     * Check if functionality plugin features are available
+     *
+     * @since 1.0.0
+     * @param string $feature Feature to check (e.g., 'portfolio', 'testimonials').
+     * @return bool Whether the feature is available.
+     */
+    public function has_functionality_feature(string $feature): bool {
+        switch ($feature) {
+            case 'portfolio':
+                return post_type_exists('portfolio');
+            case 'testimonials':
+                return post_type_exists('testimonial');
+            case 'portfolio_categories':
+                return taxonomy_exists('portfolio_category');
+            case 'portfolio_tags':
+                return taxonomy_exists('portfolio_tag');
+            case 'testimonial_categories':
+                return taxonomy_exists('testimonial_category');
+            default:
+                return false;
+        }
     }
 }

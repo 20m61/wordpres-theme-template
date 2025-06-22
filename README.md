@@ -43,6 +43,22 @@ KawaiiUltra\Theme\
    composer install --no-dev
    ```
 3. Activate the theme in WordPress admin
+4. **Recommended**: Install the companion plugin for full functionality
+
+### Companion Plugin
+
+The theme works best with the **KawaiiUltra Functionality** plugin, which provides:
+- Custom post types (Portfolio, Testimonials)
+- Custom taxonomies (Portfolio Categories, Portfolio Tags, Testimonial Categories)
+- Business logic functionality
+
+#### Installing the Companion Plugin
+
+1. Copy the `kawaiiultra-functionality` folder from the theme directory to your `wp-content/plugins/` directory
+2. Activate the plugin through the WordPress admin 'Plugins' menu
+3. Your custom post types and taxonomies will be immediately available
+
+The theme will display an admin notice if the companion plugin is not installed, but will continue to function normally.
 
 ## Development
 
@@ -132,6 +148,34 @@ kawaii-ultra-theme/
 ├── footer.php             # Footer template
 └── README.md              # This file
 ```
+
+## Theme/Plugin Relationship
+
+This theme follows WordPress best practices by separating presentation from functionality:
+
+### Theme Responsibilities (Presentation)
+- Visual design and styling
+- Template structure and layout
+- Theme customizer settings
+- Asset loading (CSS/JS)
+- Typography and color schemes
+
+### Plugin Responsibilities (Functionality)
+- Custom post types and taxonomies
+- Business logic and data processing
+- API integrations
+- Advanced features that should persist across theme changes
+
+### Graceful Degradation
+The theme is designed to work with or without the companion plugin:
+- **With plugin**: Full featured experience with custom post types and taxonomies
+- **Without plugin**: Basic theme functionality remains intact
+- **Admin notices**: Site administrators are notified of missing plugin dependencies
+
+This separation ensures that:
+- Content and functionality are preserved when switching themes
+- The theme remains lightweight and focused on presentation
+- Features can be independently updated and maintained
 
 ## License
 
