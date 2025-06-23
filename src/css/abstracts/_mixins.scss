@@ -1,0 +1,305 @@
+// =============================================================================
+// KAWAII ULTRA THEME - MIXINS
+// Reusable mixins for common CSS patterns
+// =============================================================================
+
+@use 'variables' as *;
+
+// -----------------------------------------------------------------------------
+// RESPONSIVE MIXINS
+// -----------------------------------------------------------------------------
+
+@mixin mobile-only {
+  @media (max-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
+@mixin tablet-and-up {
+  @media (min-width: #{$breakpoint-tablet + 1}) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media (min-width: #{$breakpoint-mobile + 1}) and (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop-and-up {
+  @media (min-width: #{$breakpoint-desktop + 1}) {
+    @content;
+  }
+}
+
+@mixin wide-and-up {
+  @media (min-width: #{$breakpoint-wide + 1}) {
+    @content;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// BUTTON MIXINS
+// -----------------------------------------------------------------------------
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-base;
+  border: none;
+  border-radius: $border-radius-large;
+  font-family: inherit;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-medium;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all $transition-normal;
+  position: relative;
+  overflow: hidden;
+
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-kawaii-hover {
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: $shadow-kawaii-medium;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  @include button-kawaii-hover;
+  
+  background: $gradient-pink-to-deep-pink;
+  color: $color-white;
+  box-shadow: $shadow-kawaii-soft;
+
+  &:focus {
+    box-shadow: $shadow-kawaii-medium, 0 0 0 2px $color-hot-pink;
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  @include button-kawaii-hover;
+  
+  background: $gradient-kawaii-pink;
+  color: $color-text;
+  box-shadow: $shadow-soft;
+
+  &:focus {
+    box-shadow: $shadow-medium, 0 0 0 2px $color-kawaii-pink;
+  }
+}
+
+@mixin button-ghost {
+  @include button-base;
+  
+  background: transparent;
+  color: $color-primary;
+  border: 2px solid $color-primary;
+
+  &:hover:not(:disabled) {
+    background: $color-primary;
+    color: $color-white;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px $color-primary;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// CARD MIXINS
+// -----------------------------------------------------------------------------
+
+@mixin card-base {
+  background: $color-white;
+  border-radius: $border-radius-medium;
+  box-shadow: $shadow-soft;
+  overflow: hidden;
+  transition: all $transition-normal;
+}
+
+@mixin card-kawaii-hover {
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-kawaii-medium;
+  }
+}
+
+@mixin card-elevated {
+  @include card-base;
+  
+  box-shadow: $shadow-medium;
+
+  &:hover {
+    box-shadow: $shadow-strong;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// LAYOUT MIXINS
+// -----------------------------------------------------------------------------
+
+@mixin container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-container;
+}
+
+@mixin content-width {
+  max-width: $content-width;
+  margin: 0 auto;
+}
+
+@mixin wide-width {
+  max-width: $wide-width;
+  margin: 0 auto;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin grid-auto-fit($min-width: 250px, $gap: $spacing-base) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+// -----------------------------------------------------------------------------
+// TYPOGRAPHY MIXINS
+// -----------------------------------------------------------------------------
+
+@mixin heading-base {
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $color-text;
+  margin: 0;
+}
+
+@mixin heading-1 {
+  @include heading-base;
+  font-size: $font-size-xxx-large;
+  font-weight: $font-weight-extrabold;
+}
+
+@mixin heading-2 {
+  @include heading-base;
+  font-size: $font-size-xx-large;
+}
+
+@mixin heading-3 {
+  @include heading-base;
+  font-size: $font-size-x-large;
+}
+
+@mixin heading-4 {
+  @include heading-base;
+  font-size: $font-size-large;
+}
+
+@mixin text-gradient($gradient: $gradient-pink-to-deep-pink) {
+  background: $gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+// -----------------------------------------------------------------------------
+// UTILITY MIXINS
+// -----------------------------------------------------------------------------
+
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin focus-ring {
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+@mixin kawaii-animation($name, $duration: $transition-normal) {
+  animation: $name $duration ease-in-out;
+}
+
+// Animation keyframes
+@keyframes kawaii-bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes kawaii-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes kawaii-glow {
+  0%, 100% {
+    box-shadow: $shadow-kawaii-soft;
+  }
+  50% {
+    box-shadow: $shadow-kawaii-strong;
+  }
+}

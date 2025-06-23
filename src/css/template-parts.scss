@@ -1,367 +1,198 @@
+// =============================================================================
+// KAWAII ULTRA THEME - TEMPLATE PARTS STYLESHEET
+// Template parts styles using modular Sass architecture  
+// =============================================================================
+
+@use 'abstracts' as *;
+@use 'layouts/header' as header;
+@use 'layouts/footer' as footer;
+
 /* 
  * Kawaii Ultra - Template Parts CSS
  * Styles for template parts (headers, footers, sidebars)
+ * 
+ * This file imports the modular layout styles
  */
 
-/* ==========================================================================
-   Kawaii Header Styles
-   ========================================================================== */
-
+// Legacy template parts compatibility - extend the new modular classes
 .kawaii-header {
-    background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
-    border-bottom: 1px solid #e2e8f0;
-    position: relative;
+    @extend .header;
+    
+    &--simple {
+        @extend .header--centered;
+    }
+    
+    &--centered {
+        @extend .header--centered;
+    }
 }
-
-.kawaii-header__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-}
-
-/* Simple Header */
-.kawaii-header--simple .kawaii-header__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.kawaii-header--simple .kawaii-header__branding {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.kawaii-header--simple .site-title {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.kawaii-header--simple .site-title a {
-    color: #2d3748;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.kawaii-header--simple .site-title a:hover {
-    color: #ff69b4;
-}
-
-.kawaii-header--simple .site-description {
-    margin: 0;
-    font-size: 0.875rem;
-    color: #718096;
-}
-
-/* Centered Header */
-.kawaii-header--centered .kawaii-header__container {
-    text-align: center;
-}
-
-.kawaii-header--centered .kawaii-header__top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.kawaii-header--centered .kawaii-header__main {
-    margin-bottom: 1rem;
-}
-
-.kawaii-header--centered .site-title {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: 800;
-}
-
-.kawaii-header--centered .site-title a {
-    color: #2d3748;
-    text-decoration: none;
-}
-
-.kawaii-header--centered .site-description {
-    margin: 0.5rem 0 0;
-    font-size: 1rem;
-    color: #718096;
-}
-
-/* Navigation */
-.kawaii-nav-menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 2rem;
-}
-
-.kawaii-nav-menu li {
-    position: relative;
-}
-
-.kawaii-nav-menu a {
-    color: #2d3748;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 0;
-    transition: color 0.3s ease;
-}
-
-.kawaii-nav-menu a:hover {
-    color: #ff69b4;
-}
-
-.kawaii-nav-menu--centered {
-    justify-content: center;
-}
-
-/* Search */
-.kawaii-search-toggle {
-    background: none;
-    border: none;
-    font-size: 1.25rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-
-.kawaii-search-toggle:hover {
-    background: rgba(255, 105, 180, 0.1);
-}
-
-/* Social Icons */
-.kawaii-header__social {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.kawaii-social-icon {
-    font-size: 1.25rem;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.kawaii-social-icon:hover {
-    opacity: 1;
-}
-
-/* ==========================================================================
-   Kawaii Footer Styles
-   ========================================================================== */
 
 .kawaii-footer {
-    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-    color: #ffffff;
-    margin-top: 4rem;
+    @extend .footer;
+    
+    &--simple {
+        @extend .footer--simple;
+    }
+    
+    &--detailed {
+        @extend .footer--detailed;
+    }
 }
 
-.kawaii-footer__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 2rem 1rem;
-}
-
-/* Simple Footer */
-.kawaii-footer--simple .kawaii-footer__widgets {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.kawaii-footer--simple .kawaii-footer__bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Detailed Footer */
-.kawaii-footer--detailed .kawaii-footer__main {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-    margin-bottom: 2rem;
-}
-
-.kawaii-footer--detailed .kawaii-footer__brand {
-    /* Brand section styling */
-}
-
-.kawaii-footer--detailed .kawaii-footer__title {
-    margin: 0 0 1rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ff69b4;
-}
-
-.kawaii-footer--detailed .kawaii-footer__description {
-    margin: 0;
-    color: #cbd5e0;
-    line-height: 1.6;
-}
-
-.kawaii-footer--detailed .kawaii-footer__widgets {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-}
-
-.kawaii-footer--detailed .kawaii-footer__bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Footer Copyright */
-.kawaii-footer__copyright p {
-    margin: 0;
-    color: #cbd5e0;
-    font-size: 0.875rem;
-}
-
-/* Footer Navigation */
-.kawaii-footer-menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 1.5rem;
-}
-
-.kawaii-footer-menu a {
-    color: #cbd5e0;
-    text-decoration: none;
-    font-size: 0.875rem;
-    transition: color 0.3s ease;
-}
-
-.kawaii-footer-menu a:hover {
-    color: #ff69b4;
-}
-
-/* Footer Social */
-.kawaii-footer__social {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.kawaii-social-text {
-    color: #cbd5e0;
-    font-size: 0.875rem;
-}
-
-.kawaii-social-icons {
-    display: flex;
-    gap: 0.25rem;
+.kawaii-sidebar {
+    background: $color-white;
+    border-radius: $border-radius-medium;
+    padding: $spacing-md;
+    box-shadow: $shadow-soft;
+    
+    &--default {
+        .kawaii-sidebar__header {
+            margin-bottom: $spacing-md;
+            padding-bottom: $spacing-base;
+            border-bottom: 2px solid $color-primary;
+        }
+        
+        .kawaii-sidebar__title {
+            margin: 0;
+            font-size: $font-size-normal;
+            font-weight: $font-weight-bold;
+            color: $color-text;
+        }
+    }
+    
+    &--minimal {
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    /* Widget Styling */
+    .widget {
+        margin-bottom: $spacing-lg;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    .widget-title {
+        margin: 0 0 $spacing-base;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-semibold;
+        color: $color-text;
+        position: relative;
+        
+        &::after {
+            content: '🌸';
+            margin-left: $spacing-sm;
+            opacity: 0.7;
+        }
+    }
 }
 
 /* ==========================================================================
-   Kawaii Sidebar Styles
+   Additional Template Parts
    ========================================================================== */
 
-.kawaii-sidebar {
-    background: #ffffff;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+// Breadcrumbs
+.kawaii-breadcrumbs {
+    font-size: $font-size-small;
+    color: $color-text-muted;
+    margin-bottom: $spacing-base;
+    
+    &__list {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: $spacing-xs;
+    }
+    
+    &__item {
+        &::after {
+            content: ' / ';
+            margin-left: $spacing-xs;
+            color: $color-text-muted;
+        }
+        
+        &:last-child::after {
+            display: none;
+        }
+    }
+    
+    &__link {
+        color: $color-primary;
+        text-decoration: none;
+        
+        &:hover {
+            color: kawaii-darken($color-primary, 10%);
+            text-decoration: underline;
+        }
+    }
 }
 
-.kawaii-sidebar--default .kawaii-sidebar__header {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #ff69b4;
-}
-
-.kawaii-sidebar--default .kawaii-sidebar__title {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #2d3748;
-}
-
-.kawaii-sidebar--minimal {
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-}
-
-/* Widget Styling */
-.kawaii-sidebar .widget {
-    margin-bottom: 2rem;
-}
-
-.kawaii-sidebar .widget:last-child {
-    margin-bottom: 0;
-}
-
-.kawaii-sidebar .widget-title {
-    margin: 0 0 1rem;
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: #2d3748;
-    position: relative;
-}
-
-.kawaii-sidebar--default .widget-title::after {
-    content: '🌸';
-    margin-left: 0.5rem;
-    opacity: 0.7;
+// Call to action section
+.kawaii-cta {
+    background: $gradient-kawaii-rainbow;
+    color: $color-white;
+    text-align: center;
+    padding: $spacing-3xl $spacing-container;
+    border-radius: $border-radius-medium;
+    margin: $spacing-3xl 0;
+    
+    &__title {
+        @include heading-2;
+        color: $color-white;
+        margin-bottom: $spacing-base;
+    }
+    
+    &__text {
+        font-size: $font-size-normal;
+        margin-bottom: $spacing-lg;
+        opacity: 0.9;
+    }
+    
+    &__button {
+        @include button-base;
+        @include button-kawaii-hover;
+        background: $color-white;
+        color: $color-primary;
+        padding: $spacing-base $spacing-lg;
+        font-size: $font-size-normal;
+        
+        &:hover {
+            background: $color-background-light;
+            transform: translateY(-2px);
+            box-shadow: $shadow-strong;
+        }
+    }
 }
 
 /* ==========================================================================
    Responsive Design
    ========================================================================== */
 
-@media (max-width: 768px) {
-    .kawaii-header--simple .kawaii-header__container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .kawaii-nav-menu {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .kawaii-header--centered .kawaii-header__top {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .kawaii-footer--simple .kawaii-footer__bottom,
-    .kawaii-footer--detailed .kawaii-footer__bottom {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-    
-    .kawaii-footer--detailed .kawaii-footer__main {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .kawaii-footer-menu {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-}
-
-@media (max-width: 480px) {
+@include mobile-only {
     .kawaii-header__container,
     .kawaii-footer__container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: $spacing-base;
+        padding-right: $spacing-base;
     }
     
     .kawaii-sidebar {
-        padding: 1rem;
+        padding: $spacing-base;
+    }
+    
+    .kawaii-cta {
+        padding: $spacing-lg $spacing-base;
+        
+        &__title {
+            font-size: $font-size-x-large;
+        }
+        
+        &__button {
+            padding: $spacing-sm $spacing-base;
+            font-size: $font-size-medium;
+        }
     }
 }

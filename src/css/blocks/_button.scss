@@ -1,0 +1,261 @@
+// =============================================================================
+// BLOCKS - BUTTON
+// Gutenberg button block using BEM methodology
+// =============================================================================
+
+@use '../abstracts' as *;
+
+// Kawaii Button Block
+.block-button {
+  // Block wrapper
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    
+    &--center {
+      justify-content: center;
+    }
+    
+    &--right {
+      justify-content: flex-end;
+    }
+    
+    &--vertical {
+      flex-direction: column;
+      align-items: flex-start;
+      
+      &.block-button__wrapper--center {
+        align-items: center;
+      }
+      
+      &.block-button__wrapper--right {
+        align-items: flex-end;
+      }
+    }
+  }
+  
+  // Button element
+  &__button {
+    @include button-base;
+    @include button-kawaii-hover;
+    
+    // Button style modifiers
+    &--primary {
+      @include button-primary;
+    }
+    
+    &--secondary {
+      @include button-secondary;
+    }
+    
+    &--ghost {
+      @include button-ghost;
+    }
+    
+    &--kawaii {
+      background: $gradient-kawaii-rainbow;
+      color: $color-white;
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, alpha($color-white, 0.4), transparent);
+        transition: left 0.5s;
+      }
+      
+      &:hover::before {
+        left: 100%;
+      }
+      
+      &:hover:not(:disabled) {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: $shadow-kawaii-strong;
+      }
+    }
+    
+    &--cute {
+      background: $gradient-light-pink-to-pink;
+      color: $color-white;
+      position: relative;
+      
+      &::after {
+        content: '🌸';
+        margin-left: $spacing-xs;
+        font-size: 0.875em;
+      }
+      
+      &:hover:not(:disabled) {
+        background: $gradient-pink-to-deep-pink;
+      }
+    }
+    
+    &--pastel {
+      background: $gradient-soft-pastel;
+      color: $color-text;
+      border: 2px solid alpha($color-primary, 0.3);
+      
+      &:hover:not(:disabled) {
+        background: alpha($color-primary, 0.1);
+        border-color: $color-primary;
+      }
+    }
+    
+    // Size modifiers
+    &--small {
+      padding: $spacing-xs $spacing-sm;
+      font-size: $font-size-small;
+      border-radius: $border-radius-medium;
+    }
+    
+    &--medium {
+      padding: $spacing-sm $spacing-base;
+      font-size: $font-size-medium;
+      border-radius: $border-radius-large;
+    }
+    
+    &--large {
+      padding: $spacing-base $spacing-lg;
+      font-size: $font-size-normal;
+      border-radius: $border-radius-large;
+    }
+    
+    &--xl {
+      padding: $spacing-md $spacing-xl;
+      font-size: $font-size-large;
+      border-radius: $border-radius-large;
+    }
+    
+    // Shape modifiers
+    &--rounded {
+      border-radius: $border-radius-round;
+      width: 3rem;
+      height: 3rem;
+      padding: 0;
+      
+      &.block-button__button--small {
+        width: 2rem;
+        height: 2rem;
+      }
+      
+      &.block-button__button--large {
+        width: 4rem;
+        height: 4rem;
+      }
+    }
+    
+    &--pill {
+      border-radius: 50px;
+    }
+    
+    &--square {
+      border-radius: 0;
+    }
+    
+    // Width modifiers
+    &--full {
+      width: 100%;
+    }
+    
+    // Special effects
+    &--glow {
+      box-shadow: $shadow-kawaii-medium;
+      
+      &:hover:not(:disabled) {
+        box-shadow: $shadow-kawaii-strong;
+        @include kawaii-animation(kawaii-glow, 1s);
+      }
+    }
+    
+    &--bounce {
+      &:hover:not(:disabled) {
+        @include kawaii-animation(kawaii-bounce, 0.6s);
+      }
+    }
+    
+    &--pulse {
+      @include kawaii-animation(kawaii-pulse, 2s);
+      animation-iteration-count: infinite;
+    }
+  }
+  
+  // Button elements
+  &__icon {
+    font-size: 1.2em;
+    
+    &--left {
+      margin-right: $spacing-xs;
+      margin-left: 0;
+    }
+    
+    &--right {
+      margin-left: $spacing-xs;
+      margin-right: 0;
+    }
+    
+    &--only {
+      margin: 0;
+    }
+  }
+  
+  &__text {
+    // Text-specific styles if needed
+  }
+  
+  // Responsive adjustments
+  @include mobile-only {
+    &__button {
+      &--large {
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-size-medium;
+      }
+      
+      &:not(.block-button__button--rounded) {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+// Block alignment utilities
+.wp-block-kawaii-ultra-button {
+  &.aligncenter {
+    text-align: center;
+  }
+  
+  &.alignright {
+    text-align: right;
+  }
+  
+  &.alignleft {
+    text-align: left;
+  }
+}
+
+// Multiple buttons in a row
+.wp-block-buttons {
+  .wp-block-kawaii-ultra-button {
+    display: inline-block;
+    margin-right: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  
+  &.aligncenter {
+    text-align: center;
+  }
+  
+  &.alignright {
+    text-align: right;
+  }
+}

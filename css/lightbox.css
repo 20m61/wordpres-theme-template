@@ -1,0 +1,219 @@
+/* 
+ * Kawaii Ultra - Lightbox CSS
+ * Styles for the gallery lightbox functionality
+ */
+
+/* ==========================================================================
+   Lightbox Modal
+   ========================================================================== */
+
+.kawaii-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kawaii-lightbox__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}
+
+.kawaii-lightbox__content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.kawaii-lightbox__image {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.kawaii-lightbox__caption {
+    background: rgba(255, 255, 255, 0.9);
+    color: #2d3748;
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 500;
+    max-width: 500px;
+}
+
+/* ==========================================================================
+   Lightbox Controls
+   ========================================================================== */
+
+.kawaii-lightbox__close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 105, 180, 0.3);
+}
+
+.kawaii-lightbox__close:hover {
+    background: #ff1493;
+    transform: scale(1.1);
+}
+
+.kawaii-lightbox__prev,
+.kawaii-lightbox__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 105, 180, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kawaii-lightbox__prev {
+    left: -60px;
+}
+
+.kawaii-lightbox__next {
+    right: -60px;
+}
+
+.kawaii-lightbox__prev:hover,
+.kawaii-lightbox__next:hover {
+    background: rgba(255, 20, 147, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* ==========================================================================
+   Carousel Navigation
+   ========================================================================== */
+
+.kawaii-carousel__prev,
+.kawaii-carousel__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 105, 180, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.kawaii-carousel__prev {
+    left: 10px;
+}
+
+.kawaii-carousel__next {
+    right: 10px;
+}
+
+.kawaii-carousel__prev:hover,
+.kawaii-carousel__next:hover {
+    background: rgba(255, 20, 147, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.kawaii-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.kawaii-carousel__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 105, 180, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.kawaii-carousel__dot.active,
+.kawaii-carousel__dot:hover {
+    background: #ff69b4;
+    transform: scale(1.2);
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .kawaii-lightbox__prev {
+        left: 10px;
+    }
+    
+    .kawaii-lightbox__next {
+        right: 10px;
+    }
+    
+    .kawaii-lightbox__close {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .kawaii-lightbox__caption {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .kawaii-lightbox__prev,
+    .kawaii-lightbox__next {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .kawaii-lightbox__close {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+}

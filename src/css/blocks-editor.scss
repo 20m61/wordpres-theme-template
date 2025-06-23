@@ -1,3 +1,10 @@
+// =============================================================================
+// KAWAII ULTRA THEME - BLOCK EDITOR STYLESHEET
+// Block editor styles using modular Sass architecture
+// =============================================================================
+
+@use 'abstracts' as *;
+
 /* 
  * Kawaii Ultra - Block Editor CSS
  * Styles for blocks in the WordPress editor
@@ -11,24 +18,50 @@
 .wp-block[data-type="kawaii-ultra/button"],
 .wp-block[data-type="kawaii-ultra/card"],
 .wp-block[data-type="kawaii-ultra/gallery"] {
-    margin: 1rem 0;
+    margin: $spacing-base 0;
+    
+    &.is-selected {
+        outline: 2px solid $color-primary;
+        outline-offset: 2px;
+    }
 }
 
 /* Button block editor styles */
 .editor-styles-wrapper .kawaii-button {
     pointer-events: none; /* Prevent clicks in editor */
+    
+    &:hover {
+        transform: none; /* Disable hover effects in editor */
+    }
 }
 
 /* Card block editor styles */
 .editor-styles-wrapper .kawaii-card {
     max-width: 100%;
+    
+    &:hover {
+        transform: none; /* Disable hover effects in editor */
+    }
 }
 
 /* Gallery block editor styles */
-.editor-styles-wrapper .kawaii-gallery--empty {
-    border: 2px dashed #e2e8f0;
-    border-radius: 10px;
-    background: #f7fafc;
+.editor-styles-wrapper .kawaii-gallery {
+    &--empty {
+        border: 2px dashed $color-border;
+        border-radius: $border-radius-small;
+        background: $color-background-light;
+        padding: $spacing-lg;
+        text-align: center;
+        color: $color-text-muted;
+        
+        &::before {
+            content: '📷';
+            display: block;
+            font-size: 2rem;
+            margin-bottom: $spacing-sm;
+            opacity: 0.5;
+        }
+    }
 }
 
 /* ==========================================================================
@@ -37,35 +70,82 @@
 
 /* Custom block category styling */
 .block-editor-inserter__panel-content .components-panel__body-title {
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
 }
 
 /* Kawaii block icons in inserter */
-.block-editor-block-types-list__item[data-id*="kawaii-ultra"] .block-editor-block-types-list__item-icon {
-    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
-    color: white;
-    border-radius: 8px;
+.block-editor-block-types-list__item[data-id*="kawaii-ultra"] {
+    .block-editor-block-types-list__item-icon {
+        background: $gradient-pink-to-deep-pink;
+        color: $color-white;
+        border-radius: $border-radius-small;
+    }
 }
 
 /* ==========================================================================
    Block Variations Preview
    ========================================================================== */
 
-.block-editor-block-variation-picker .block-editor-block-variation-picker__variation {
-    border-radius: 8px;
-    transition: all 0.2s ease;
+.block-editor-block-variation-picker {
+    .block-editor-block-variation-picker__variation {
+        border-radius: $border-radius-small;
+        transition: all $transition-normal;
+        
+        &:hover {
+            box-shadow: $shadow-kawaii-soft;
+            transform: translateY(-2px);
+        }
+    }
 }
 
-.block-editor-block-variation-picker .block-editor-block-variation-picker__variation:hover {
-    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
-    transform: translateY(-2px);
+/* ==========================================================================
+   Editor Typography
+   ========================================================================== */
+
+.editor-styles-wrapper {
+    /* Apply theme typography to editor */
+    font-family: $font-family-system;
+    line-height: $line-height-normal;
+    color: $color-text;
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: $color-text;
+        font-weight: $font-weight-bold;
+        line-height: $line-height-tight;
+    }
+    
+    h1 { font-size: $font-size-xxx-large; }
+    h2 { font-size: $font-size-xx-large; }
+    h3 { font-size: $font-size-x-large; }
+    h4 { font-size: $font-size-large; }
+    h5 { font-size: $font-size-normal; }
+    h6 { font-size: $font-size-medium; }
+    
+    a {
+        color: $color-primary;
+        
+        &:hover {
+            color: kawaii-darken($color-primary, 10%);
+        }
+    }
 }
 
 /* ==========================================================================
    Responsive Editor Styles
    ========================================================================== */
 
-@media (max-width: 782px) {
+@include tablet-only {
+    .editor-styles-wrapper .kawaii-gallery {
+        &--columns-3,
+        &--columns-4,
+        &--columns-5,
+        &--columns-6 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@include mobile-only {
     .editor-styles-wrapper .kawaii-gallery {
         grid-template-columns: 1fr !important;
     }

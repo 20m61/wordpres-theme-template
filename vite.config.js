@@ -56,11 +56,15 @@ export default defineConfig(({ mode }) => {
       } : {}
     },
     
-    // CSS configuration
+    // CSS configuration with modern Sass
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "src/css/variables";`
+          // Use modern Sass API
+          api: 'modern-compiler',
+          // Don't inject global imports - let modules handle their own imports
+          // This allows for proper @use/@forward functionality
+          silenceDeprecations: ['legacy-js-api']
         }
       },
       postcss: {

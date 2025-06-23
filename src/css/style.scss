@@ -8,75 +8,293 @@ Text Domain: kawaii-ultra
 Domain Path: /languages
 */
 
-@import 'variables';
+// =============================================================================
+// KAWAII ULTRA THEME - MAIN STYLESHEET
+// Modular Sass architecture with BEM methodology
+// =============================================================================
 
-/* Basic theme styles */
-body {
-    font-family: $font-family-base;
-    line-height: $line-height-base;
-    color: $text-color;
+// Import abstracts for variables, mixins, functions
+@use 'abstracts' as *;
+
+// Import all layers in order
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/global';
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/forms';
+@use 'layouts/header';
+@use 'layouts/footer';
+@use 'layouts/grid';
+@use 'blocks/button';
+@use 'blocks/card';
+@use 'blocks/gallery';
+
+// Legacy WordPress styles compatibility
+// These styles maintain compatibility with existing WordPress classes
+// while the site transitions to the new BEM architecture
+
+// Site wrapper
+.site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.container {
-    max-width: $container-max-width;
-    margin: 0 auto;
-    padding: 0 $spacing-base;
-}
-
-/* Header styles */
+// Header compatibility
+// @deprecated WordPress default classes - use BEM .header classes instead
 .site-header {
-    background: $background-color;
-    border-bottom: 1px solid $border-color;
-    padding: $spacing-base 0;
+  @extend .header;
+  @extend .header--sticky;
 }
 
 .site-title {
-    margin: 0;
-    font-size: 2rem;
+  @extend .header__title;
+  
+  a {
+    @extend .header__title-link;
+  }
 }
 
-/* Navigation styles */
+.site-description {
+  @extend .header__tagline;
+}
+
+// Navigation compatibility  
 .main-navigation {
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-    }
-
-    li {
-        margin-right: $spacing-base;
-    }
-
-    a {
-        text-decoration: none;
-        color: $text-color;
-        padding: $spacing-small 0;
-        
-        &:hover {
-            color: $primary-color;
-        }
-    }
+  @extend .nav;
+  
+  ul {
+    @extend .nav__list;
+  }
+  
+  li {
+    @extend .nav__item;
+  }
+  
+  a {
+    @extend .nav__link;
+  }
+  
+  .menu-toggle {
+    @extend .nav__toggle;
+  }
 }
 
-/* Content styles */
+// Content area
 .site-main {
-    padding: $spacing-large 0;
+  flex: 1;
+  padding: $spacing-section 0;
+  
+  @extend .container;
+}
+
+.entry-header {
+  margin-bottom: $spacing-lg;
+  text-align: center;
 }
 
 .entry-title {
-    font-size: 1.8rem;
-    margin-bottom: $spacing-base;
+  @extend .heading;
+  @extend .heading--1;
+  margin-bottom: $spacing-base;
+}
+
+.entry-meta {
+  font-size: $font-size-small;
+  color: $color-text-muted;
+  margin-bottom: $spacing-base;
 }
 
 .entry-content {
-    margin-bottom: 30px;
+  @extend .typography;
+  margin-bottom: $spacing-lg;
+  
+  // WordPress block compatibility
+  .wp-block-button {
+    .wp-block-button__link {
+      @extend .btn;
+      @extend .btn--primary;
+    }
+  }
+  
+  .wp-block-quote {
+    @extend .blockquote;
+  }
+  
+  .wp-block-code {
+    @extend .code--block;
+  }
 }
 
-/* Footer styles */
+.entry-footer {
+  padding-top: $spacing-base;
+  border-top: 1px solid $color-border;
+  font-size: $font-size-small;
+  color: $color-text-muted;
+}
+
+// Sidebar compatibility
+.widget-area {
+  .widget {
+    @extend .card;
+    margin-bottom: $spacing-lg;
+    
+    .widget-title {
+      @extend .card__title;
+    }
+    
+    .widget-content {
+      @extend .card__body;
+    }
+  }
+}
+
+// Footer compatibility
 .site-footer {
-    background: $light-gray;
-    padding: $spacing-base 0;
-    border-top: 1px solid $border-color;
+  @extend .footer;
+  @extend .footer--detailed;
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-sm;
+  margin: $spacing-lg 0;
+  
+  .page-numbers {
+    @extend .btn;
+    @extend .btn--ghost;
+    @extend .btn--small;
+    
+    &.current {
+      @extend .btn--primary;
+    }
+  }
+}
+
+// Comments
+.comments-area {
+  margin-top: $spacing-3xl;
+  
+  .comment-form {
+    @extend .form;
+    
+    .form-submit {
+      .submit {
+        @extend .btn;
+        @extend .btn--primary;
+      }
+    }
+  }
+}
+
+// Search form
+.search-form {
+  @extend .search-form;
+  
+  &--kawaii {
+    @extend .search-form--kawaii;
+  }
+}
+
+// Post navigation
+.post-navigation,
+.posts-navigation {
+  margin: $spacing-lg 0;
+  
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-base;
+    
+    @include mobile-only {
+      flex-direction: column;
+    }
+  }
+  
+  .nav-previous,
+  .nav-next {
+    @extend .btn;
+    @extend .btn--ghost;
+  }
+}
+
+// Archive pages
+.archive-header {
+  text-align: center;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-lg 0;
+  background: $color-background-light;
+  border-radius: $border-radius-medium;
+  
+  .archive-title {
+    @extend .heading;
+    @extend .heading--2;
+    margin-bottom: $spacing-sm;
+  }
+  
+  .archive-description {
+    color: $color-text-light;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+// Responsive images
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+// WordPress alignment classes
+.aligncenter {
+  display: block;
+  margin: 0 auto;
+}
+
+.alignleft {
+  float: left;
+  margin: 0 $spacing-base $spacing-base 0;
+}
+
+.alignright {
+  float: right;
+  margin: 0 0 $spacing-base $spacing-base;
+}
+
+.alignwide {
+  max-width: $wide-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alignfull {
+  max-width: none;
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+// WordPress caption
+.wp-caption {
+  max-width: 100%;
+  
+  .wp-caption-text {
+    font-size: $font-size-small;
+    color: $color-text-muted;
     text-align: center;
+    padding: $spacing-xs 0;
+  }
+}
+
+// Screen reader text
+.screen-reader-text {
+  @extend .u-sr-only;
+}
+
+// Skip link
+.skip-link {
+  @extend .skip-link;
 }

@@ -1,0 +1,216 @@
+// =============================================================================
+// BASE - RESET
+// Modern CSS reset based on modern-normalize and custom additions
+// =============================================================================
+
+@use '../abstracts' as *;
+
+// Box sizing reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Remove default margin and padding
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// Root defaults
+:root {
+  // Improve text rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  // Scroll behavior
+  scroll-behavior: smooth;
+  
+  // Color scheme support
+  color-scheme: light;
+}
+
+// Document defaults
+html {
+  // Prevent adjustments of font size after orientation changes in iOS
+  -webkit-text-size-adjust: 100%;
+  
+  // Set base font size for rem calculations
+  font-size: 16px;
+  
+  // Improve consistency of default fonts
+  font-family: $font-family-system;
+  line-height: $line-height-normal;
+}
+
+// Body defaults
+body {
+  // Remove the margin in all browsers
+  margin: 0;
+  
+  // Set default colors
+  color: $color-text;
+  background-color: $color-background;
+  
+  // Prevent horizontal overflow
+  overflow-x: hidden;
+  
+  // Improve text rendering on high-DPI displays
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Remove list styles on ul, ol elements with a list role
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+// Set core body defaults for screen readers
+body:not(.no-scroll) {
+  scroll-behavior: smooth;
+}
+
+// Make images easier to work with
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Remove built-in form typography styles
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// Remove default button styles
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+// Avoid text overflows
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+// Create a root stacking context
+#root,
+#__next {
+  isolation: isolate;
+}
+
+// Focus styles
+:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+// Remove focus styles for non-keyboard users
+[data-focus-method="mouse"] :focus {
+  outline: none;
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  :root {
+    --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.5);
+    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.6);
+    --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.7);
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  :root {
+    scroll-behavior: auto;
+  }
+}
+
+// Print styles
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+  }
+  
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

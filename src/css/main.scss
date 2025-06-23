@@ -1,0 +1,37 @@
+/*
+Theme Name: KawaiiUltra Theme Template
+Description: A modern WordPress theme template demonstrating OOP architecture with namespacing
+Version: 1.0.0
+Author: 20m61
+License: MIT
+Text Domain: kawaii-ultra
+Domain Path: /languages
+*/
+
+// =============================================================================
+// KAWAII ULTRA THEME - MAIN STYLESHEET
+// Modular Sass architecture with BEM methodology
+// =============================================================================
+
+// Import all layers in order
+@use 'abstracts' as *;
+
+// Base layer
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/global';
+
+// Components layer
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/forms';
+
+// Layouts layer
+@use 'layouts/header';
+@use 'layouts/footer';
+@use 'layouts/grid';
+
+// Blocks layer
+@use 'blocks/button';
+@use 'blocks/card';
+@use 'blocks/gallery';

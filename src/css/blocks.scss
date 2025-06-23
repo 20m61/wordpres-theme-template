@@ -1,304 +1,170 @@
-/* 
- * Kawaii Ultra - Blocks CSS
- * Styles for custom Gutenberg blocks
- */
+// =============================================================================
+// KAWAII ULTRA THEME - BLOCKS STYLESHEET  
+// Gutenberg block styles using modular Sass architecture with BEM
+// =============================================================================
 
-/* ==========================================================================
-   Kawaii Button Block
-   ========================================================================== */
+// Import abstracts for variables, mixins, and functions
+@use 'abstracts' as *;
 
+// Import individual block modules
+@use 'blocks/button' as button;
+@use 'blocks/card' as card;
+@use 'blocks/gallery' as gallery;
+
+// Legacy block compatibility
+// These styles maintain compatibility with existing block implementations
+// while the site transitions to the new BEM architecture
+
+// Legacy Kawaii Button compatibility
+// @deprecated Use .block-button__button classes instead. Will be removed in v2.0.0
 .kawaii-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 25px;
-    font-family: inherit;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+  @extend .block-button__button;
+  @extend .block-button__button--kawaii;
+  
+  &--primary {
+    @extend .block-button__button--primary;
+  }
+  
+  &--secondary {
+    @extend .block-button__button--secondary;
+  }
+  
+  &--ghost {
+    @extend .block-button__button--ghost;
+  }
+  
+  &--small {
+    @extend .block-button__button--small;
+  }
+  
+  &--medium {
+    @extend .block-button__button--medium;
+  }
+  
+  &--large {
+    @extend .block-button__button--large;
+  }
+  
+  &--round {
+    @extend .block-button__button--rounded;
+  }
+  
+  &__icon {
+    @extend .block-button__icon;
+  }
+  
+  &__text {
+    @extend .block-button__text;
+  }
 }
 
-.kawaii-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
-}
-
-.kawaii-button:active {
-    transform: translateY(0);
-}
-
-/* Button Styles */
-.kawaii-button--primary {
-    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
-    color: #ffffff;
-    box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
-}
-
-.kawaii-button--secondary {
-    background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 100%);
-    color: #2d3748;
-    box-shadow: 0 2px 10px rgba(255, 182, 193, 0.2);
-}
-
-.kawaii-button--ghost {
-    background: transparent;
-    color: #ff69b4;
-    border: 2px solid #ff69b4;
-}
-
-.kawaii-button--round {
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    padding: 0;
-    justify-content: center;
-}
-
-/* Button Sizes */
-.kawaii-button--small {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-}
-
-.kawaii-button--medium {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-}
-
-.kawaii-button--large {
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-}
-
-.kawaii-button__icon {
-    font-size: 1.2em;
-}
-
-.kawaii-button__text {
-    /* Text styling */
-}
-
-/* ==========================================================================
-   Kawaii Card Block
-   ========================================================================== */
-
+// Legacy Kawaii Card compatibility
+// @deprecated Use .block-card classes instead. Will be removed in v2.0.0
 .kawaii-card {
-    background: #ffffff;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    position: relative;
+  @extend .block-card;
+  @extend .block-card--default;
+  
+  &--default {
+    @extend .block-card--default;
+  }
+  
+  &--minimal {
+    @extend .block-card--minimal;
+  }
+  
+  &--cute {
+    @extend .block-card--cute;
+  }
+  
+  &--pastel {
+    @extend .block-card--pastel;
+  }
+  
+  &--product {
+    @extend .block-card--product;
+  }
+  
+  &__image {
+    @extend .block-card__image;
+    
+    img {
+      @extend .block-card__image;
+    }
+  }
+  
+  &__content {
+    @extend .block-card__content;
+  }
+  
+  &__title {
+    @extend .block-card__title;
+  }
+  
+  &__text {
+    @extend .block-card__text;
+  }
+  
+  &__actions {
+    @extend .block-card__actions;
+  }
 }
 
-.kawaii-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.kawaii-card__image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.kawaii-card__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.kawaii-card:hover .kawaii-card__image img {
-    transform: scale(1.05);
-}
-
-.kawaii-card__content {
-    padding: 1.5rem;
-}
-
-.kawaii-card__title {
-    margin: 0 0 1rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #2d3748;
-}
-
-.kawaii-card__text {
-    margin: 0 0 1.5rem;
-    color: #4a5568;
-    line-height: 1.6;
-}
-
-.kawaii-card__actions {
-    /* Actions styling */
-}
-
-/* Card Styles */
-.kawaii-card--default {
-    /* Default card styling */
-}
-
-.kawaii-card--minimal {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
-}
-
-.kawaii-card--cute {
-    background: linear-gradient(135deg, #fff0f8 0%, #ffe4e8 100%);
-    border: 2px solid #ffb6c1;
-}
-
-.kawaii-card--cute::before {
-    content: '🌸';
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.5rem;
-    opacity: 0.7;
-}
-
-.kawaii-card--pastel {
-    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-}
-
-.kawaii-card--product {
-    border: none;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
-}
-
-/* ==========================================================================
-   Kawaii Gallery Block
-   ========================================================================== */
-
+// Legacy Kawaii Gallery compatibility
+// @deprecated Use .block-gallery classes instead. Will be removed in v2.0.0
 .kawaii-gallery {
-    display: grid;
-    gap: 1rem;
+  @extend .block-gallery;
+  
+  &--columns-1 { @extend .block-gallery--columns-1; }
+  &--columns-2 { @extend .block-gallery--columns-2; }
+  &--columns-3 { @extend .block-gallery--columns-3; }
+  &--columns-4 { @extend .block-gallery--columns-4; }
+  &--columns-5 { @extend .block-gallery--columns-5; }
+  &--columns-6 { @extend .block-gallery--columns-6; }
+  
+  &--spacing-none { @extend .block-gallery--spacing-none; }
+  &--spacing-small { @extend .block-gallery--spacing-small; }
+  &--spacing-medium { @extend .block-gallery--spacing-medium; }
+  &--spacing-large { @extend .block-gallery--spacing-large; }
+  
+  &--grid { @extend .block-gallery--grid; }
+  &--masonry { @extend .block-gallery--masonry; }
+  &--carousel { @extend .block-gallery--carousel; }
+  &--collage { @extend .block-gallery--collage; }
+  &--empty { @extend .block-gallery--empty; }
+  
+  &__item {
+    @extend .block-gallery__item;
+  }
+  
+  &__link {
+    @extend .block-gallery__link;
+  }
+  
+  &__image {
+    @extend .block-gallery__image;
+  }
+  
+  &__caption {
+    @extend .block-gallery__caption;
+  }
 }
 
-.kawaii-gallery--columns-1 { grid-template-columns: repeat(1, 1fr); }
-.kawaii-gallery--columns-2 { grid-template-columns: repeat(2, 1fr); }
-.kawaii-gallery--columns-3 { grid-template-columns: repeat(3, 1fr); }
-.kawaii-gallery--columns-4 { grid-template-columns: repeat(4, 1fr); }
-.kawaii-gallery--columns-5 { grid-template-columns: repeat(5, 1fr); }
-.kawaii-gallery--columns-6 { grid-template-columns: repeat(6, 1fr); }
-
-/* Gallery Spacing */
-.kawaii-gallery--spacing-small { gap: 0.5rem; }
-.kawaii-gallery--spacing-medium { gap: 1rem; }
-.kawaii-gallery--spacing-large { gap: 2rem; }
-.kawaii-gallery--spacing-none { gap: 0; }
-
-.kawaii-gallery__item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+// WordPress block editor specific styles
+// @deprecated Use block classes directly. Will be removed in v2.0.0
+.wp-block-kawaii-ultra-button {
+  .kawaii-button {
+    @extend .block-button__button;
+  }
 }
 
-.kawaii-gallery__item:hover {
-    transform: scale(1.02);
+.wp-block-kawaii-ultra-card {
+  .kawaii-card {
+    @extend .block-card;
+  }
 }
 
-.kawaii-gallery__link {
-    display: block;
-    text-decoration: none;
-}
-
-.kawaii-gallery__image {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: inherit;
-}
-
-.kawaii-gallery__caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: white;
-    padding: 1rem;
-    font-size: 0.875rem;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.kawaii-gallery__item:hover .kawaii-gallery__caption {
-    transform: translateY(0);
-}
-
-/* Gallery Styles */
-.kawaii-gallery--grid {
-    /* Grid layout specific styles */
-}
-
-.kawaii-gallery--masonry {
-    /* Masonry layout - needs JavaScript for proper implementation */
-}
-
-.kawaii-gallery--carousel {
-    /* Carousel layout - needs JavaScript for proper implementation */
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-}
-
-.kawaii-gallery--carousel .kawaii-gallery__item {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-}
-
-.kawaii-gallery--collage {
-    /* Creative collage layout */
-}
-
-.kawaii-gallery--empty {
-    text-align: center;
-    padding: 2rem;
-    color: #718096;
-    font-style: italic;
-}
-
-/* ==========================================================================
-   Responsive Design
-   ========================================================================== */
-
-@media (max-width: 768px) {
-    .kawaii-gallery--columns-3,
-    .kawaii-gallery--columns-4,
-    .kawaii-gallery--columns-5,
-    .kawaii-gallery--columns-6 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .kawaii-button--large {
-        padding: 0.875rem 1.75rem;
-        font-size: 1rem;
-    }
-    
-    .kawaii-card__content {
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .kawaii-gallery {
-        grid-template-columns: 1fr !important;
-    }
-    
-    .kawaii-button {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .kawaii-button--round {
-        width: 3rem;
-    }
+.wp-block-kawaii-ultra-gallery {
+  .kawaii-gallery {
+    @extend .block-gallery;
+  }
 }
