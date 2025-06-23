@@ -1,0 +1,76 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "kawaii-ultra/button",
+    "title": "Kawaii Button",
+    "category": "kawaii-blocks",
+    "icon": "button",
+    "description": "A customizable kawaii-styled button with multiple variations and animations.",
+    "keywords": ["button", "kawaii", "cta", "call-to-action"],
+    "version": "1.0.0",
+    "textdomain": "kawaii-ultra",
+    "supports": {
+        "html": false,
+        "align": ["left", "center", "right"],
+        "alignWide": false,
+        "color": {
+            "background": true,
+            "text": true,
+            "gradients": true
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "attributes": {
+        "text": {
+            "type": "string",
+            "default": "Click me! ✨"
+        },
+        "url": {
+            "type": "string",
+            "default": ""
+        },
+        "style": {
+            "type": "string",
+            "default": "primary",
+            "enum": ["primary", "secondary", "ghost", "round"]
+        },
+        "size": {
+            "type": "string",
+            "default": "medium",
+            "enum": ["small", "medium", "large"]
+        },
+        "icon": {
+            "type": "string",
+            "default": ""
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": ""
+        },
+        "textColor": {
+            "type": "string",
+            "default": ""
+        },
+        "opensInNewTab": {
+            "type": "boolean",
+            "default": false
+        },
+        "rel": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "example": {
+        "attributes": {
+            "text": "Example Button ✨",
+            "style": "primary",
+            "size": "medium"
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css"
+}

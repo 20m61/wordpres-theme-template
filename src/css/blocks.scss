@@ -16,6 +16,7 @@
 // while the site transitions to the new BEM architecture
 
 // Legacy Kawaii Button compatibility
+// @deprecated Use .block-button__button classes instead. Will be removed in v2.0.0
 .kawaii-button {
   @extend .block-button__button;
   @extend .block-button__button--kawaii;
@@ -58,6 +59,7 @@
 }
 
 // Legacy Kawaii Card compatibility
+// @deprecated Use .block-card classes instead. Will be removed in v2.0.0
 .kawaii-card {
   @extend .block-card;
   @extend .block-card--default;
@@ -108,6 +110,7 @@
 }
 
 // Legacy Kawaii Gallery compatibility
+// @deprecated Use .block-gallery classes instead. Will be removed in v2.0.0
 .kawaii-gallery {
   @extend .block-gallery;
   
@@ -147,6 +150,7 @@
 }
 
 // WordPress block editor specific styles
+// @deprecated Use block classes directly. Will be removed in v2.0.0
 .wp-block-kawaii-ultra-button {
   .kawaii-button {
     @extend .block-button__button;

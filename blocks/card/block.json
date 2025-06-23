@@ -1,0 +1,92 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "kawaii-ultra/card",
+    "title": "Kawaii Card",
+    "category": "kawaii-blocks",
+    "icon": "id-alt",
+    "description": "A versatile kawaii-styled card component for displaying content with optional image, title, text, and action button.",
+    "keywords": ["card", "kawaii", "content", "image"],
+    "version": "1.0.0",
+    "textdomain": "kawaii-ultra",
+    "supports": {
+        "html": false,
+        "align": ["left", "center", "right", "wide", "full"],
+        "color": {
+            "background": true,
+            "text": true,
+            "gradients": true
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true
+        }
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Card Title 🌸"
+        },
+        "content": {
+            "type": "string",
+            "default": "This is a kawaii card with cute styling and interactive features."
+        },
+        "imageUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "imageAlt": {
+            "type": "string",
+            "default": ""
+        },
+        "imageId": {
+            "type": "number",
+            "default": 0
+        },
+        "buttonText": {
+            "type": "string",
+            "default": ""
+        },
+        "buttonUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "style": {
+            "type": "string",
+            "default": "default",
+            "enum": ["default", "minimal", "cute", "pastel", "product"]
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": ""
+        },
+        "textColor": {
+            "type": "string",
+            "default": ""
+        },
+        "hasImage": {
+            "type": "boolean",
+            "default": false
+        },
+        "hasButton": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "example": {
+        "attributes": {
+            "title": "Welcome Card 🌸",
+            "content": "This is an example of a kawaii card component.",
+            "style": "cute",
+            "hasButton": true,
+            "buttonText": "Learn More"
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css"
+}

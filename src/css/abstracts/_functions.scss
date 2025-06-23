@@ -199,20 +199,5 @@
 /// @param {String} $string - The string to convert
 /// @return {String} - The lowercase string
 @function to-lower($string) {
-  $lowercase: 'abcdefghijklmnopqrstuvwxyz';
-  $uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  $result: '';
-  
-  @for $i from 1 through string.length($string) {
-    $char: string.slice($string, $i, $i);
-    $index: string.index($uppercase, $char);
-    
-    @if $index {
-      $result: $result + string.slice($lowercase, $index, $index);
-    } @else {
-      $result: $result + $char;
-    }
-  }
-  
-  @return $result;
+  @return string.to-lower-case($string);
 }

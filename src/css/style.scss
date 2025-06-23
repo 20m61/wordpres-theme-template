@@ -42,6 +42,7 @@ Domain Path: /languages
 }
 
 // Header compatibility
+// @deprecated WordPress default classes - use BEM .header classes instead
 .site-header {
   @extend .header;
   @extend .header--sticky;

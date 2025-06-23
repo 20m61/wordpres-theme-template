@@ -1,0 +1,77 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "kawaii-ultra/gallery",
+    "title": "Kawaii Gallery",
+    "category": "kawaii-blocks",
+    "icon": "format-gallery",
+    "description": "An advanced kawaii-styled gallery component with multiple layout options and interactive features.",
+    "keywords": ["gallery", "kawaii", "images", "lightbox", "carousel"],
+    "version": "1.0.0",
+    "textdomain": "kawaii-ultra",
+    "supports": {
+        "html": false,
+        "align": ["left", "center", "right", "wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "attributes": {
+        "images": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
+        },
+        "columns": {
+            "type": "number",
+            "default": 3,
+            "minimum": 1,
+            "maximum": 6
+        },
+        "style": {
+            "type": "string",
+            "default": "grid",
+            "enum": ["grid", "masonry", "carousel", "collage"]
+        },
+        "spacing": {
+            "type": "string",
+            "default": "medium",
+            "enum": ["none", "small", "medium", "large"]
+        },
+        "showCaptions": {
+            "type": "boolean",
+            "default": true
+        },
+        "lightbox": {
+            "type": "boolean",
+            "default": true
+        },
+        "imageSize": {
+            "type": "string",
+            "default": "medium_large"
+        },
+        "linkTo": {
+            "type": "string",
+            "default": "none",
+            "enum": ["none", "media", "attachment"]
+        },
+        "randomize": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "example": {
+        "attributes": {
+            "columns": 3,
+            "style": "grid",
+            "showCaptions": true,
+            "lightbox": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css"
+}
