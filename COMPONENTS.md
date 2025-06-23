@@ -144,6 +144,22 @@ A clean hero section with:
 - Call-to-action button
 - Kawaii background color
 
+#### Hero Section (Purple Theme) (`kawaii-ultra/hero-simple-purple`)
+
+Purple-themed variation with:
+- Purple gradient background
+- White text for contrast
+- Magical unicorn emoji
+- Purple color scheme
+
+#### Hero Section (Blue Theme) (`kawaii-ultra/hero-simple-blue`)
+
+Blue-themed variation with:
+- Blue gradient background
+- Ocean-inspired styling
+- Wave emoji theme
+- Serene color palette
+
 #### Hero with Image (`kawaii-ultra/hero-with-image`)
 
 A hero section featuring:
@@ -160,6 +176,14 @@ Basic CTA section with:
 - Centered heading
 - Description text
 - Single action button
+
+#### CTA Section (Compact) (`kawaii-ultra/cta-simple-compact`)
+
+Compact CTA variation with:
+- Minimal content
+- Reduced padding
+- Focused message
+- Smaller button size
 
 #### CTA with Cards (`kawaii-ultra/cta-with-cards`)
 
@@ -179,6 +203,22 @@ A grid layout showcasing features with:
 - Pastel color backgrounds
 - Responsive design
 
+#### Features Grid (Minimal) (`kawaii-ultra/features-grid-minimal`)
+
+A compact version with:
+- 3 feature cards in 1 row
+- Essential content only
+- Smaller padding and text
+- Clean, minimal design
+
+#### Features Grid (Rich Content) (`kawaii-ultra/features-grid-rich`)
+
+An expanded version with:
+- Detailed descriptions
+- Multiple sections
+- Enhanced spacing
+- Rich content layout
+
 #### Features with Gallery (`kawaii-ultra/features-gallery`)
 
 Combined feature section with:
@@ -186,6 +226,43 @@ Combined feature section with:
 - Feature descriptions
 - Call-to-action
 - Mixed content layout
+
+### Testimonial Patterns
+
+#### Testimonial Carousel (`kawaii-ultra/testimonials-carousel`)
+
+A kawaii testimonial section with:
+- 3 customer testimonial cards
+- Gradient background
+- Profile information
+- Kawaii styling with rounded cards
+
+#### Simple Testimonials (`kawaii-ultra/testimonials-simple`)
+
+A minimal testimonial pattern with:
+- Single centered quote
+- Kawaii border styling
+- Simple layout
+- Emphasis on the testimonial text
+
+### Team Member Patterns
+
+#### Team Member Cards (`kawaii-ultra/team-cards`)
+
+Full team showcase with:
+- Individual member cards
+- Profile photos (placeholder)
+- Role descriptions
+- Gradient card backgrounds
+- Personal bio information
+
+#### Team Grid (Compact) (`kawaii-ultra/team-grid-compact`)
+
+Compact team display with:
+- Smaller profile cards
+- Essential information only
+- 4-column grid layout
+- Minimal design approach
 
 ## Template Parts
 
@@ -280,6 +357,61 @@ Enhanced versions of WordPress core blocks:
 - **Kawaii Section**: Group block with pastel background
 
 ## Usage Guide
+
+### Inserting Block Patterns
+
+1. **In the Block Editor:**
+   - Click the "+" button to add a new block
+   - Navigate to the "Patterns" tab
+   - Browse patterns by category:
+     - **Kawaii Hero Sections** - For page headers and main banners
+     - **Kawaii Call-to-Action** - For conversion-focused sections
+     - **Kawaii Features** - For highlighting product/service features
+     - **Kawaii Testimonials** - For social proof and reviews
+     - **Kawaii Team** - For showcasing team members
+   - Click on any pattern to insert it
+
+2. **Pattern Categories:**
+   - **Synced Patterns:** Changes reflect across all instances
+   - **Unsynced Patterns:** Each instance can be customized independently
+
+### Pattern Variations Guide
+
+#### Color Scheme Variations
+- **Default (Pink):** Classic kawaii pink color scheme
+- **Purple Theme:** Magical purple gradients with unicorn styling
+- **Blue Theme:** Serene ocean-inspired blue tones
+
+#### Layout Variations
+- **Standard:** Full-featured layouts with complete content
+- **Compact:** Minimal layouts with essential content only
+- **Rich Content:** Expanded layouts with detailed information
+
+#### Content Density Options
+- **Minimal:** Essential information only, clean design
+- **Standard:** Balanced content with good information density
+- **Rich:** Comprehensive content with detailed descriptions
+
+### Best Practices
+
+1. **Pattern Selection:**
+   - Use hero patterns at the top of pages
+   - Place CTA patterns strategically for conversions
+   - Use feature grids to highlight key benefits
+   - Add testimonials for social proof
+   - Showcase team members on about pages
+
+2. **Customization Tips:**
+   - Replace placeholder images with your own content
+   - Update text content to match your brand
+   - Adjust colors using the block editor color palette
+   - Modify spacing using the spacing controls
+
+3. **Performance Considerations:**
+   - Use minimal variations for faster loading
+   - Optimize images before uploading
+   - Test patterns on mobile devices
+   - Keep content concise and focused
 
 ### For Content Editors
 

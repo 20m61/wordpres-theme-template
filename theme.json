@@ -950,6 +950,13 @@
 			}
 		}
 	},
+	"patterns": [
+		"kawaii-hero",
+		"kawaii-cta", 
+		"kawaii-features",
+		"kawaii-testimonials",
+		"kawaii-team"
+	],
 	"templateParts": [
 		{
 			"name": "header",
